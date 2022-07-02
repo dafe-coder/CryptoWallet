@@ -1,8 +1,13 @@
 const path = require('path')
+const CopyPlugin = require('copy-webpack-plugin')
+const HtmlPlugin = require('html-webpack-plugin')
 
 module.exports = {
 	mode: 'development',
-	entry: path.resolve(__dirname, 'src', 'test.js'),
+	devtool: 'cheap-module-source-map',
+	entry: {
+		popup: path.resolve('src/index.js'),
+	},
 	module: {
 		rules: [
 			{
@@ -28,8 +33,23 @@ module.exports = {
 			},
 		],
 	},
+	plugins: [
+		new CopyPlugin({
+			patterns: [
+				{
+					from: path.resolve('src/manifest.json'),
+					to: path.resolve('dist'),
+				},
+			],
+		}),
+		new HtmlPlugin({
+			title: 'Crypto Wallet',
+			filename: 'popup.html',
+			chunks: ['popup'],
+		}),
+	],
 	output: {
-		filename: 'index.js',
-		path: path.resolve(__dirname, 'dist'),
+		filename: '[name].js',
+		path: path.resolve('dist'),
 	},
 }

@@ -1,0 +1,10 @@
+{
+	"manifest_version": 3,
+	"name": "Wallet Extension",
+	"description": "Chrome Extension, Такой же как Metamask",
+	"version": "1.0.0",
+	"action": {
+		"default_popup": "popup.html",
+		"default_title": "Crypto Wallet"
+	}
+}
