@@ -3,8 +3,14 @@
 	"name": "Wallet Extension",
 	"description": "Chrome Extension, Такой же как Metamask",
 	"version": "1.0.0",
+	"icons": {
+		"16": "icon.png",
+		"48": "icon.png",
+		"128": "icon_128.png"
+	},
 	"action": {
 		"default_popup": "popup.html",
-		"default_title": "Crypto Wallet"
+		"default_title": "Crypto Wallet",
+		"default_icon": "icon.png"
 	}
 }

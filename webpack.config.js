@@ -31,6 +31,14 @@ module.exports = {
 					},
 				],
 			},
+			{
+				use: ['style-loader', 'css-loader'],
+				test: /\.css$/i,
+			},
+			{
+				type: 'asset/resource',
+				test: /\.(jpg|jpeg|png|woff|woff2|ttf|svg)$/,
+			},
 		],
 	},
 	plugins: [
@@ -38,6 +46,10 @@ module.exports = {
 			patterns: [
 				{
 					from: path.resolve('src/manifest.json'),
+					to: path.resolve('dist'),
+				},
+				{
+					from: path.resolve('src/static'),
 					to: path.resolve('dist'),
 				},
 			],
