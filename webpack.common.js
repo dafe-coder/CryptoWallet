@@ -1,12 +1,12 @@
 const path = require('path')
 const CopyPlugin = require('copy-webpack-plugin')
 const HtmlPlugin = require('html-webpack-plugin')
+const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 
 module.exports = {
-	mode: 'development',
-	devtool: 'cheap-module-source-map',
 	entry: {
 		popup: path.resolve('src/index.js'),
+		contentScript: path.resolve('src/contentScript/contentScript.js'),
 	},
 	module: {
 		rules: [
@@ -42,6 +42,9 @@ module.exports = {
 		],
 	},
 	plugins: [
+		new CleanWebpackPlugin({
+			cleanStaleWebpackAssets: false,
+		}),
 		new CopyPlugin({
 			patterns: [
 				{
@@ -54,14 +57,21 @@ module.exports = {
 				},
 			],
 		}),
-		new HtmlPlugin({
-			title: 'Crypto Wallet',
-			filename: 'popup.html',
-			chunks: ['popup'],
-		}),
+		...getHtmlPlugins(['popup']),
 	],
 	output: {
 		filename: '[name].js',
 		path: path.resolve('dist'),
 	},
+}
+
+function getHtmlPlugins(chunks) {
+	return chunks.map(
+		(chunk) =>
+			new HtmlPlugin({
+				title: 'Crypto Wallet',
+				filename: `${chunk}.html`,
+				chunks: [chunk],
+			})
+	)
 }
