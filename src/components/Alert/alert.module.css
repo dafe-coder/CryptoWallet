@@ -1,0 +1,11 @@
+.alert {
+    border: 2px solid var(--gray);
+    border-radius: 8px;
+    padding: 20px;
+}
+
+.danger {
+    border-width: 1px;
+    border-color: var(--error);
+    color: var(--error);
+}

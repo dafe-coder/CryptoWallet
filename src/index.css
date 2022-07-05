@@ -1,3 +1,33 @@
+@font-face {
+  font-family: 'MyFont2';
+ 	src: url('./static/FontAwesome6ProSolid900.woff2') format('woff2'),
+		url('./static/FontAwesome6ProSolid900.woff') format('woff');
+  font-weight: 600;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'MyFont';
+ 	src: url('./static/FontAwesome6ProThin100.woff2') format('woff2'),
+		url('./static/FontAwesome6ProThin100.woff') format('woff');
+  font-weight: 600;
+  font-style: normal;
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
+* {
+	box-sizing: border-box;
+}
+::-webkit-scrollbar { width: 3px; height: 1px;}
+::-webkit-scrollbar-button { background-color: var(--primary); height: 0; }
+::-webkit-scrollbar-track { background-color: #6347b97c;}
+::-webkit-scrollbar-track-piece { background-color: var(--white);}
+::-webkit-scrollbar-thumb { height: 50px; background-color: var(--primary); border-radius: 3px;}
+::-webkit-scrollbar-corner { background-color: #999;}
+::-webkit-resizer { background-color: var(--primary);}
+
+i {
+	font-family: 'MyFont2' !important;
+}
 html,
 body {
 	font-family: 'Inter', sans-serif;
@@ -18,4 +48,97 @@ html {
 	width: 375px;
 	height: 600px;
 	background: var(--primary);
+}
+
+:root {
+	--white: #fff;
+	--primary: #4f33a3;
+	--disabled: #bbbbbb;
+	--gray: #ebebeb;
+	--dark: #06040D;
+	--dark-gray: #737373;
+	--error: #F04848;
+	--success: #23AC00;
+	--warning: #FAD200;
+}
+.disabled {
+    color: var(--disabled);
+    background: var(--gray);
+    width: 100%;
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 20px;
+    cursor: not-allowed;
+}
+
+.btn {
+	border-radius: 8px;
+	border: 2px solid var(--white);
+	padding: 16px 20px;
+	cursor: pointer;
+	transition: all ease 0.2s;
+}
+
+.btn i {
+	margin-right: 10px;
+	font-family: 'FontAwesome Thin';
+}
+
+.btn-list-row {
+	display: flex;
+	flex-direction: column;
+}
+.btn-list-row > *:not(:last-child) {
+	margin-bottom: 16px;
+}
+
+section {
+	padding: 25px;
+	height: 100%;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	max-height: 100%;
+	overflow-y: auto;
+}
+
+.bg-white {
+	background: var(--white);
+}
+
+#app {
+	height: 100%;
+	width: 100%;
+}
+
+.d-none {
+	display: none;
+}
+
+.success-validate {
+    color: var(--success);
+}
+
+.wallet_body {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.wallet_form {
+	display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+}
+
+.copyhelper {
+	position: absolute;
+	left: -1000px;
+	top: -1000px;
+}
+
+#qrcode svg{
+	margin-bottom: 0;
 }

@@ -2,7 +2,7 @@ const path = require('path')
 const CopyPlugin = require('copy-webpack-plugin')
 const HtmlPlugin = require('html-webpack-plugin')
 const { CleanWebpackPlugin } = require('clean-webpack-plugin')
-
+const NodePolyfillPlugin = require('node-polyfill-webpack-plugin')
 module.exports = {
 	entry: {
 		popup: path.resolve('src/index.js'),
@@ -32,27 +32,35 @@ module.exports = {
 				],
 			},
 			{
-				use: ['style-loader', 'css-loader'],
 				test: /\.css$/i,
+				use: ['style-loader', 'css-loader'],
 			},
 			{
+				test: /\.(png|svg|jpg|jpeg|gif)$/i,
 				type: 'asset/resource',
-				test: /\.(jpg|jpeg|png|woff|woff2|ttf|svg)$/,
+			},
+			{
+				test: /\.(woff|woff2|eot|ttf|otf)$/i,
+				type: 'asset/resource',
 			},
 		],
 	},
+	resolve: {
+		extensions: ['.js'],
+	},
 	plugins: [
+		new NodePolyfillPlugin(),
 		new CleanWebpackPlugin({
 			cleanStaleWebpackAssets: false,
 		}),
 		new CopyPlugin({
 			patterns: [
 				{
-					from: path.resolve('src/manifest.json'),
+					from: path.resolve('src/static'),
 					to: path.resolve('dist'),
 				},
 				{
-					from: path.resolve('src/static'),
+					from: path.resolve('src/manifest.json'),
 					to: path.resolve('dist'),
 				},
 			],
@@ -62,6 +70,14 @@ module.exports = {
 	output: {
 		filename: '[name].js',
 		path: path.resolve('dist'),
+		assetModuleFilename: 'assets/[hash][ext][query]',
+	},
+	optimization: {
+		splitChunks: {
+			chunks(chunk) {
+				return chunk.name !== 'contentScript'
+			},
+		},
 	},
 }
 
@@ -69,7 +85,7 @@ function getHtmlPlugins(chunks) {
 	return chunks.map(
 		(chunk) =>
 			new HtmlPlugin({
-				title: 'Crypto Wallet',
+				title: 'Weather Extension',
 				filename: `${chunk}.html`,
 				chunks: [chunk],
 			})

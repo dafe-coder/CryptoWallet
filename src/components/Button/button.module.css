@@ -1,0 +1,20 @@
+.white {
+	color: var(--primary);
+	background: var(--white);
+}
+.transparent {
+	background: none;
+	color: var(--white);
+}
+.primary {
+    background: var(--primary);
+    color: var(--white);
+    width: 100%;
+    font-size: 14px;
+    line-height: 20px;
+    cursor: pointer;
+    margin-top: 30px;
+}
+.arrow {
+    margin-left: 10px;
+}

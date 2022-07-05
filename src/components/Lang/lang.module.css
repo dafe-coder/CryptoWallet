@@ -1,0 +1,19 @@
+button.btn {
+	position: absolute;
+	top: 25px;
+	right: 25px;
+	border: 1px solid var(--white);
+	border-radius: 4px;
+	background: transparent;
+	color: var(--white);
+	padding: 7px 15px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	cursor: pointer;
+}
+
+button.btn svg {
+	margin-left: 5px;
+	width: 6px;
+}
