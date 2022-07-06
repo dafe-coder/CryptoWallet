@@ -21,6 +21,7 @@ const Form = () => {
 					id='confirm-password'
 					label='Spending password'
 					type='password-check'
+					errorPar='Passwords doesn’t match!'
 				/>
 			</div>
 			<Button className='disabled'>

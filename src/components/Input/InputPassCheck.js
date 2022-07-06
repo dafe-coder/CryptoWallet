@@ -4,18 +4,24 @@ import Par from '../Par/Par'
 import cn from 'classnames'
 import ShowPass from './../ShowPass/ShowPass'
 import styles from './input.module.css'
+import { useDispatch, useSelector } from 'react-redux'
+import { setPasswordMatch, setPasswordCheck } from './../../actions'
 
-const InputPassCheck = ({
-	id,
-	label,
-	errorPar,
-	passCheck,
-	checkPassValid,
-	passCheckValid,
-	setPassCheck,
-}) => {
+const InputPassCheck = ({ id, label, errorPar }) => {
+	const dispatch = useDispatch()
+	const { passwordMatch, password } = useSelector((state) => state)
+
 	const [marginInput, setMarginInput] = useState(null)
+	const [passwordCheck, setPassCheck] = useState('')
 
+	const checkPassValid = (value) => {
+		console.log(passwordMatch)
+		if (password === value) {
+			dispatch(setPasswordMatch(true))
+		} else {
+			dispatch(setPasswordMatch(false))
+		}
+	}
 	function onBlur(value) {
 		if (value.length > 0) {
 			setMarginInput(true)
@@ -25,14 +31,15 @@ const InputPassCheck = ({
 	}
 	const onPassCheckValidate = (e) => {
 		let value = e.target.value
+		dispatch(setPasswordCheck(value))
 		setPassCheck(value)
-		checkPassValid()
+		checkPassValid(value)
 	}
 	return (
 		<div
 			className={styles.wallet_input}
 			style={
-				marginInput || passCheck.length > 1
+				marginInput || passwordCheck.length > 1
 					? { marginTop: '40px' }
 					: { marginTop: 0 }
 			}>
@@ -40,21 +47,29 @@ const InputPassCheck = ({
 			<input
 				onInput={(e) => onPassCheckValidate(e)}
 				onFocus={() => setMarginInput(true)}
-				onBlur={() => onBlur(passCheck)}
+				onBlur={() => onBlur(passwordCheck)}
 				className={cn(styles.input, {
-					[styles.success]: passCheckValid == true,
-					[styles.error]: passCheckValid == false,
+					[styles.success]: passwordMatch == true,
+					[styles.error]: passwordMatch == false,
 				})}
 				type='password'
 				id={id}
 				name='name'
 				required={true}
-				value={passCheck}
+				value={passwordCheck}
 			/>
 			<label className={styles.label} htmlFor={id}>
 				{label}
 			</label>
-			{errorPar ? <Par type='error'>{errorPar}</Par> : <></>}
+			{errorPar ? (
+				passwordMatch == false ? (
+					<Par type='error'>{errorPar}</Par>
+				) : (
+					<></>
+				)
+			) : (
+				<></>
+			)}
 		</div>
 	)
 }

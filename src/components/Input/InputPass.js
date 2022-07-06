@@ -5,19 +5,33 @@ import styles from './input.module.css'
 import cn from 'classnames'
 import ShowPass from './../ShowPass/ShowPass'
 
-const InputPass = ({ pass, setPass, id, label, checkPassValid }) => {
+import { setPassword, setPasswordMatch } from '../../actions'
+import { useDispatch, useSelector } from 'react-redux'
+
+const InputPass = ({ id, label }) => {
+	const dispatch = useDispatch()
+	const { passwordCheck } = useSelector((state) => state)
+
 	const [uppercaseValid, setUppercaseValid] = useState(false)
 	const [specCharValid, setSpecCharValid] = useState(false)
 	const [numberValid, setNumberValid] = useState(false)
 	const [lengthValid, setLengthValid] = useState(false)
 	const [marginInput, setMarginInput] = useState(null)
 	const [validPass, setValidPass] = useState(null)
+	const [pass, setPass] = useState('')
 
 	function onBlur(value) {
 		if (value.length > 0) {
 			setMarginInput(true)
 		} else {
 			setMarginInput(false)
+		}
+	}
+	const checkPassValid = (value) => {
+		if (value === passwordCheck) {
+			dispatch(setPasswordMatch(true))
+		} else {
+			dispatch(setPasswordMatch(false))
 		}
 	}
 	const onInputValidate = (e) => {
@@ -28,6 +42,9 @@ const InputPass = ({ pass, setPass, id, label, checkPassValid }) => {
 		let number = false
 		let length = false
 		setPass(value)
+		dispatch(setPassword(value))
+		checkPassValid(value)
+
 		// Uppercase
 		arrValue.forEach((letter) => {
 			if (letter == letter.toUpperCase() && letter.match(/^[a-zA-Z]/)) {
@@ -65,7 +82,6 @@ const InputPass = ({ pass, setPass, id, label, checkPassValid }) => {
 		} else {
 			setValidPass(false)
 		}
-		checkPassValid()
 	}
 	return (
 		<div
@@ -84,6 +100,7 @@ const InputPass = ({ pass, setPass, id, label, checkPassValid }) => {
 					[styles.success]: validPass == true,
 					[styles.warning]: validPass == false,
 				})}
+				type='password'
 				id={id}
 				name='name'
 				required={true}

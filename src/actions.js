@@ -16,3 +16,21 @@ export const setCurrentPage = (pageSelector) => {
 		payload: pageSelector,
 	}
 }
+export const setPassword = (password) => {
+	return {
+		type: 'SET_PASSWORD',
+		payload: password,
+	}
+}
+export const setPasswordCheck = (passwordCheck) => {
+	return {
+		type: 'SET_PASSWORD_CHECK',
+		payload: passwordCheck,
+	}
+}
+export const setPasswordMatch = (password) => {
+	return {
+		type: 'SET_PASSWORD_MATCH',
+		payload: password,
+	}
+}
