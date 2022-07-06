@@ -10,9 +10,17 @@ const Button = ({
 	onClick,
 	arrow = false,
 }) => {
+	function onClickFunc() {
+		if (onClick) {
+			onClick()
+		} else {
+			return
+		}
+	}
 	return (
 		<button
-			onClick={() => onClick(false)}
+			type='button'
+			onClick={onClickFunc}
 			id={id}
 			className={cn('btn', className, {
 				[styles.transparent]: type == 'transparent',

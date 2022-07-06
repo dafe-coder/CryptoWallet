@@ -61,15 +61,7 @@ html {
 	--success: #23AC00;
 	--warning: #FAD200;
 }
-.disabled {
-    color: var(--disabled);
-    background: var(--gray);
-    width: 100%;
-    font-weight: 600;
-    font-size: 14px;
-    line-height: 20px;
-    cursor: not-allowed;
-}
+
 
 .btn {
 	border-radius: 8px;
@@ -78,7 +70,15 @@ html {
 	cursor: pointer;
 	transition: all ease 0.2s;
 }
-
+button.disabled {
+    color: var(--disabled);
+    background: var(--gray);
+    width: 100%;
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 20px;
+    cursor: not-allowed;
+}
 .btn i {
 	margin-right: 10px;
 	font-family: 'FontAwesome Thin';

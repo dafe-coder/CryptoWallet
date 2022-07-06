@@ -3,11 +3,16 @@ import { useState } from 'react'
 import Par from '../Par/Par'
 import styles from './input.module.css'
 import cn from 'classnames'
+import { useSelector, useDispatch } from 'react-redux'
+import { setNameValid } from '../../actions'
 
 const InputName = ({ id, label, errorPar }) => {
 	const [name, setName] = useState('')
-	const [nameValid, setNameValid] = useState(null)
 	const [marginInput, setMarginInput] = useState(null)
+
+	const { nameValid } = useSelector((state) => state)
+	const dispatch = useDispatch()
+
 	function onBlur(value) {
 		if (value.length > 0) {
 			setMarginInput(true)
@@ -20,9 +25,9 @@ const InputName = ({ id, label, errorPar }) => {
 		setName(name)
 
 		if (name.length > 1 && name.length <= 40) {
-			setNameValid(true)
+			dispatch(setNameValid(true))
 		} else {
-			setNameValid(false)
+			dispatch(setNameValid(false))
 		}
 	}
 	return (

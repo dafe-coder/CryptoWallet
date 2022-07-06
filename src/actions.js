@@ -34,3 +34,15 @@ export const setPasswordMatch = (password) => {
 		payload: password,
 	}
 }
+export const setPasswordValid = (valid) => {
+	return {
+		type: 'SET_PASSWORD_VALID',
+		payload: valid,
+	}
+}
+export const setNameValid = (valid) => {
+	return {
+		type: 'SET_NAME_VALID',
+		payload: valid,
+	}
+}

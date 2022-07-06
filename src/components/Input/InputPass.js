@@ -5,19 +5,17 @@ import styles from './input.module.css'
 import cn from 'classnames'
 import ShowPass from './../ShowPass/ShowPass'
 
-import { setPassword, setPasswordMatch } from '../../actions'
+import { setPassword, setPasswordMatch, setPasswordValid } from '../../actions'
 import { useDispatch, useSelector } from 'react-redux'
 
 const InputPass = ({ id, label }) => {
 	const dispatch = useDispatch()
-	const { passwordCheck } = useSelector((state) => state)
-
+	const { passwordCheck, passwordValid } = useSelector((state) => state)
 	const [uppercaseValid, setUppercaseValid] = useState(false)
 	const [specCharValid, setSpecCharValid] = useState(false)
 	const [numberValid, setNumberValid] = useState(false)
 	const [lengthValid, setLengthValid] = useState(false)
 	const [marginInput, setMarginInput] = useState(null)
-	const [validPass, setValidPass] = useState(null)
 	const [pass, setPass] = useState('')
 
 	function onBlur(value) {
@@ -78,9 +76,9 @@ const InputPass = ({ id, label }) => {
 			setLengthValid(false)
 		}
 		if (letterUppercase && letterSpecialChars && number && length) {
-			setValidPass(true)
+			dispatch(setPasswordValid(true))
 		} else {
-			setValidPass(false)
+			dispatch(setPasswordValid(false))
 		}
 	}
 	return (
@@ -97,8 +95,8 @@ const InputPass = ({ id, label }) => {
 				onFocus={() => setMarginInput(true)}
 				onBlur={() => onBlur(pass)}
 				className={cn(styles.input, {
-					[styles.success]: validPass == true,
-					[styles.warning]: validPass == false,
+					[styles.success]: passwordValid == true,
+					[styles.warning]: passwordValid == false,
 				})}
 				type='password'
 				id={id}

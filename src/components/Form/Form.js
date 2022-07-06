@@ -1,9 +1,31 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import Par from './../../components/Par/Par'
 import Button from '../../components/Button/Button'
 import Input from '../../components/Input/Input'
+import { setCurrentPage } from '../../actions'
+import { useDispatch, useSelector } from 'react-redux'
+import cn from 'classnames'
 
 const Form = () => {
+	const dispatch = useDispatch()
+	const { passwordValid, passwordMatch, nameValid } = useSelector(
+		(state) => state
+	)
+	const [activeButton, setActiveButton] = useState(false)
+	useEffect(() => {
+		if (passwordValid && passwordMatch && nameValid) {
+			setActiveButton(true)
+		} else {
+			setActiveButton(false)
+		}
+	}, [passwordValid, passwordMatch, nameValid])
+
+	const submitForm = () => {
+		if (passwordValid && passwordMatch && nameValid) {
+			dispatch(setCurrentPage('CreateWalletSuccess'))
+		} else {
+		}
+	}
 	return (
 		<form action='#' className='wallet_form'>
 			<div className='create-wallet_info'>
@@ -24,7 +46,10 @@ const Form = () => {
 					errorPar='Passwords doesn’t match!'
 				/>
 			</div>
-			<Button className='disabled'>
+			<Button
+				type='primary'
+				className={cn({ ['disabled']: activeButton == false })}
+				onClick={submitForm}>
 				<i className='fa-solid fa-wallet'></i>
 				Create Personal wallet
 			</Button>

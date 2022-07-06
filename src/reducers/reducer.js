@@ -5,6 +5,8 @@ const initialState = {
 	password: '',
 	passwordCheck: '',
 	passwordMatch: null,
+	passwordValid: null,
+	nameValid: null,
 }
 const reducer = (state = initialState, action) => {
 	switch (action.type) {
@@ -37,6 +39,16 @@ const reducer = (state = initialState, action) => {
 			return {
 				...state,
 				passwordMatch: action.payload,
+			}
+		case 'SET_PASSWORD_VALID':
+			return {
+				...state,
+				passwordValid: action.payload,
+			}
+		case 'SET_NAME_VALID':
+			return {
+				...state,
+				nameValid: action.payload,
 			}
 		default:
 			return state
