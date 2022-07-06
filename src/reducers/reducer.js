@@ -1,6 +1,7 @@
 const initialState = {
 	phrase: '',
 	phraseArr: [],
+	currentPage: 'Home',
 }
 const reducer = (state = initialState, action) => {
 	switch (action.type) {
@@ -13,6 +14,11 @@ const reducer = (state = initialState, action) => {
 			return {
 				...state,
 				phraseArr: action.payload,
+			}
+		case 'SET_CURRENT_PAGE':
+			return {
+				...state,
+				currentPage: action.payload,
 			}
 		default:
 			return state

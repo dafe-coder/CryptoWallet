@@ -7,7 +7,7 @@ import PhraseBox from './../../components/PhraseBox/PhraseBox'
 
 const VerificatePhrase1 = () => {
 	return (
-		<section className={cn('bg-white', 'd-none')}>
+		<section className={cn('bg-white')}>
 			<Title>Back Up Wallet</Title>
 			<div className='wallet_body'>
 				<div className='wallet_body__top'>

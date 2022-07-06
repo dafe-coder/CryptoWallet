@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import styles from './phrase-box.module.css'
 import cn from 'classnames'
 import { useState } from 'react'
@@ -10,11 +10,10 @@ const PhraseBox = ({
 	select = false,
 	setOpenQr = Function.prototype,
 }) => {
-	const { phraseArr } = useSelector((state) => state)
+	const { phraseArr, phrase } = useSelector((state) => state)
 	const [copied, setCopied] = useState(false)
 
 	const onCopy = () => {
-		alert(phrase)
 		if (phrase !== '') {
 			setCopied(true)
 

@@ -1,27 +1,16 @@
 import React from 'react'
 import { createRoot } from 'react-dom/client'
-import Home from './pages/main/main'
 import './index.css'
-import CreateWalletReg from './pages/create-wallet-reg/create-wallet-reg'
-import CreateWalletSuccess from './pages/create-wallet-reg-success/create-wallet-success'
-import WalletBackup from './pages/wallet-backup/wallet-backup'
-import CreatePhrase from './pages/create-phrase/create-phrase'
-import VerificatePhrase1 from './pages/verificate-phrase/verificate-phrase-1'
+import Pages from './pages'
 import Modal from './components/modal/Modal'
 import Title from './components/Title/Title'
 import store from './store/store'
 import { Provider } from 'react-redux'
-
 const App = () => {
 	return (
 		<React.StrictMode>
 			<Provider store={store}>
-				<Home />
-				<CreateWalletReg />
-				<CreateWalletSuccess />
-				<WalletBackup />
-				<CreatePhrase />
-				<VerificatePhrase1 />
+				<Pages />
 				<Modal id='#error-verification-modal'>
 					<svg
 						width='97'

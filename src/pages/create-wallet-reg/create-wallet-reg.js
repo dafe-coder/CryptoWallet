@@ -7,7 +7,7 @@ import Title from './../../components/Title/Title'
 
 const CreateWalletReg = () => {
 	return (
-		<section className={cn('bg-white', 'd-none')}>
+		<section className={cn('bg-white')}>
 			<Title>Create Wallet</Title>
 			<div className='wallet_body'>
 				<Form />

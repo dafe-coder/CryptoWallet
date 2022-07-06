@@ -6,7 +6,7 @@ import { useDispatch } from 'react-redux'
 import Title from '../../components/Title/Title'
 import Button from '../../components/Button/Button'
 import Par from '../../components/Par/Par'
-import { setPhrase, setPhraseArr } from './../../actions'
+import { setPhrase, setPhraseArr, setCurrentPage } from './../../actions'
 
 const WalletBackup = () => {
 	const dispatch = useDispatch()
@@ -18,6 +18,7 @@ const WalletBackup = () => {
 		let arr = code.phrase.trim().split(' ')
 		dispatch(setPhrase(code.phrase))
 		dispatch(setPhraseArr(arr))
+		dispatch(setCurrentPage('CreatePhrase'))
 	}
 	return (
 		<section className={cn('bg-white')}>

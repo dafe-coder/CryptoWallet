@@ -10,3 +10,9 @@ export const setPhraseArr = (phraseArr) => {
 		payload: phraseArr,
 	}
 }
+export const setCurrentPage = (pageSelector) => {
+	return {
+		type: 'SET_CURRENT_PAGE',
+		payload: pageSelector,
+	}
+}

@@ -15,7 +15,7 @@ const CreatePhrase = () => {
 	const { phrase } = useSelector((state) => state)
 
 	return (
-		<section className={cn('bg-white', 'd-none')}>
+		<section className={cn('bg-white')}>
 			<Title>Verify Mnemonic</Title>
 			<div className='wallet_body'>
 				<div className='wallet_body__top'>

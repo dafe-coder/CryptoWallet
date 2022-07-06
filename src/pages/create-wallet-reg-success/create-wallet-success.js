@@ -9,7 +9,7 @@ import Button from './../../components/Button/Button'
 
 const CreateWalletSuccess = () => {
 	return (
-		<section className={cn('bg-white', 'd-none')}>
+		<section className={cn('bg-white')}>
 			<Title>Create Wallet</Title>
 			<div className='wallet_body'>
 				<div className='wallet_body__top'>
