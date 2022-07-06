@@ -142,3 +142,8 @@ section {
 #qrcode svg{
 	margin-bottom: 0;
 }
+
+.choose-word .active {
+    color: var(--primary);
+    border-color: var(--primary);
+}

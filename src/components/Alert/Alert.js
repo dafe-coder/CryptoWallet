@@ -10,7 +10,7 @@ const Alert = ({ children, danger = false }) => {
 			className={cn(styles.alert, {
 				[styles.danger]: danger == true,
 			})}>
-			<Title type='error'>Keep Mnemonic Phrase Safe!</Title>
+			<Title type='error-sm'>Keep Mnemonic Phrase Safe!</Title>
 			<Par type='sm'>{children}</Par>
 		</div>
 	)

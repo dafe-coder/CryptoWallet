@@ -9,10 +9,16 @@ import Modal from '../../components/modal/Modal'
 import QRCode from 'react-qr-code'
 import { useState } from 'react'
 import { useSelector } from 'react-redux'
-
+import { useDispatch } from 'react-redux'
+import { setCurrentPage } from '../../actions'
 const CreatePhrase = () => {
 	const [openQr, setOpenQr] = useState(false)
 	const { phrase } = useSelector((state) => state)
+	const dispatch = useDispatch()
+
+	const goToVereficatePhrase = () => {
+		dispatch(setCurrentPage('VerificatePhrase1'))
+	}
 
 	return (
 		<section className={cn('bg-white')}>
@@ -30,12 +36,15 @@ const CreatePhrase = () => {
 						Anyone with your mnemonic can access your wallet assets. Please back
 						up your mnemonic before you receive transfers or delete the app.
 					</Alert>
-					<Button type='primary' id='confirm-info-btn'>
+					<Button
+						onClick={goToVereficatePhrase}
+						type='primary'
+						id='confirm-info-btn'>
 						Yes, I’ve written it down
 						<i className='fa-solid fa-arrow-right-long'></i>
 					</Button>
 				</div>
-				<Modal id='qr-modal' openQr={openQr}>
+				<Modal id='qr-modal' open={openQr}>
 					<Title>Mnemonic Phrase QR Code</Title>
 					<div id='qrcode'>
 						<QRCode size={220} value={phrase} />

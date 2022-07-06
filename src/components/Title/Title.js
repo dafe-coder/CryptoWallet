@@ -10,6 +10,7 @@ const Title = ({ type = 'md', children }) => {
 				[styles.md]: type == 'md',
 				[styles.success]: type == 'success',
 				[styles.error]: type == 'error',
+				[styles.error_sm]: type == 'error-sm',
 			})}>
 			{children}
 		</h2>

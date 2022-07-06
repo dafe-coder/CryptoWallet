@@ -1,12 +1,18 @@
 const initialState = {
 	phrase: '',
 	phraseArr: [],
-	currentPage: 'CreateWalletReg',
+	phraseArrScattered: [],
+	currentPage: 'Home',
 	password: '',
 	passwordCheck: '',
 	passwordMatch: null,
 	passwordValid: null,
 	nameValid: null,
+	word1: '',
+	word2: '',
+	word3: '',
+	showErrorVerification: false,
+	showSuccessVerification: false,
 }
 const reducer = (state = initialState, action) => {
 	switch (action.type) {
@@ -19,6 +25,11 @@ const reducer = (state = initialState, action) => {
 			return {
 				...state,
 				phraseArr: action.payload,
+			}
+		case 'SET_PHRASE_ARR_SCATTERED':
+			return {
+				...state,
+				phraseArrScattered: action.payload,
 			}
 		case 'SET_CURRENT_PAGE':
 			return {
@@ -49,6 +60,31 @@ const reducer = (state = initialState, action) => {
 			return {
 				...state,
 				nameValid: action.payload,
+			}
+		case 'SET_WORD1':
+			return {
+				...state,
+				word1: action.payload,
+			}
+		case 'SET_WORD2':
+			return {
+				...state,
+				word2: action.payload,
+			}
+		case 'SET_WORD3':
+			return {
+				...state,
+				word3: action.payload,
+			}
+		case 'SET_SHOW_ERROR_VERIFICATION':
+			return {
+				...state,
+				showErrorVerification: action.payload,
+			}
+		case 'SET_SHOW_SUCCESS_VERIFICATION':
+			return {
+				...state,
+				showSuccessVerification: action.payload,
 			}
 		default:
 			return state

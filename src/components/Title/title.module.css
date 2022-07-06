@@ -22,13 +22,25 @@
 
 .success {
 	color: var(--success);
+	font-weight: 600;
+	font-size: 16px;
+	line-height: 20px;
+	text-align: center;
 }
 
-.error {
+.error_sm {
 	color: var(--error);
 	margin: 0 0 10px;
 	font-weight: 600;
 	font-size: 12px;
 	line-height: 18px;
-	text-align: left;
+	text-align: center;
+}
+.error {
+	color: var(--error);
+	margin: 0 0 10px;
+	font-weight: 600;
+	font-size: 16px;
+	line-height: 20px;
+	text-align: center;
 }

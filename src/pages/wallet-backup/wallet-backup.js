@@ -6,7 +6,12 @@ import { useDispatch } from 'react-redux'
 import Title from '../../components/Title/Title'
 import Button from '../../components/Button/Button'
 import Par from '../../components/Par/Par'
-import { setPhrase, setPhraseArr, setCurrentPage } from './../../actions'
+import {
+	setPhrase,
+	setPhraseArr,
+	setCurrentPage,
+	setPhraseArrScattered,
+} from './../../actions'
 
 const WalletBackup = () => {
 	const dispatch = useDispatch()
@@ -19,6 +24,17 @@ const WalletBackup = () => {
 		dispatch(setPhrase(code.phrase))
 		dispatch(setPhraseArr(arr))
 		dispatch(setCurrentPage('CreatePhrase'))
+		const randomArr = shuffle(arr)
+		dispatch(setPhraseArrScattered(randomArr))
+	}
+	function shuffle(array) {
+		const newArr = array.slice()
+		for (let i = newArr.length - 1; i > 0; i--) {
+			let j = Math.floor(Math.random() * (i + 1)) // случайный индекс от 0 до i
+
+			;[newArr[i], newArr[j]] = [newArr[j], newArr[i]]
+		}
+		return newArr
 	}
 	return (
 		<section className={cn('bg-white')}>

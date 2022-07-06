@@ -6,8 +6,22 @@ import Par from './../../components/Par/Par'
 import BoxWithIcon from './../../components/BoxWithIcon/BoxWithIcon'
 import ConfirmInfo from './../../components/ConfirmInfo/ConfirmInfo'
 import Button from './../../components/Button/Button'
+import { useDispatch } from 'react-redux'
+import { setCurrentPage } from '../../actions'
+import { useState } from 'react'
 
 const CreateWalletSuccess = () => {
+	const dispatch = useDispatch()
+	const [checkInfo, setCheckInfo] = useState(false)
+
+	const submitInfo = () => {
+		if (checkInfo) {
+			dispatch(setCurrentPage('WalletBackup'))
+		} else {
+			return
+		}
+	}
+
 	return (
 		<section className={cn('bg-white')}>
 			<Title>Create Wallet</Title>
@@ -33,11 +47,18 @@ const CreateWalletSuccess = () => {
 					</Par>
 				</div>
 				<div className='wallet_body__bottom'>
-					<ConfirmInfo id='confirm-info-checkbox'>
+					<ConfirmInfo
+						checkInfo={checkInfo}
+						setCheckInfo={setCheckInfo}
+						id='confirm-info-checkbox'>
 						Make sure nobody looks into your screen unless you want them to have
 						access to your funds.
 					</ConfirmInfo>
-					<Button className='disabled' type='primary' id='confirm-info-btn'>
+					<Button
+						onClick={submitInfo}
+						className={cn({ ['disabled']: checkInfo == false })}
+						type='primary'
+						id='confirm-info-btn'>
 						Continue
 						<i className='fa-solid fa-arrow-right-long'></i>
 					</Button>
