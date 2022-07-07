@@ -7,18 +7,22 @@ import CreatePhrase from './create-phrase/create-phrase'
 import VerificatePhrase1 from './verificate-phrase/verificate-phrase-1'
 import VerificatePhrase2 from './verificate-phrase/verificate-phrase-2'
 import VerificatePhrase3 from './verificate-phrase/verificate-phrase-3'
+import WalletRestore from './wallet-restore/wallet-restore'
+import RestoreWalletReg from './restore-wallet-reg/restore-wallet-reg'
+import RestoreWalletLog from './RestoreWalletLog/RestoreWalletLog'
 import Modal from '../components/modal/Modal'
 import Title from '../components/Title/Title'
+
 import { useSelector } from 'react-redux'
 
 import {
 	setShowErrorVerification,
 	setShowSuccessVerification,
-} from '../actions'
+} from '../actions/createActions'
 
 const Pages = () => {
 	const { currentPage, showErrorVerification, showSuccessVerification } =
-		useSelector((state) => state)
+		useSelector((state) => state.create)
 
 	const renderPages = () => {
 		switch (currentPage) {
@@ -38,6 +42,12 @@ const Pages = () => {
 				return <VerificatePhrase2 />
 			case 'VerificatePhrase3':
 				return <VerificatePhrase3 />
+			case 'WalletRestore':
+				return <WalletRestore />
+			case 'RestoreWalletReg':
+				return <RestoreWalletReg />
+			case 'RestoreWalletLog':
+				return <RestoreWalletLog />
 			default:
 				return <></>
 		}

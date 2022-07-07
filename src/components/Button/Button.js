@@ -22,7 +22,7 @@ const Button = ({
 			type='button'
 			onClick={onClickFunc}
 			id={id}
-			className={cn('btn', className, {
+			className={cn('btn', styles.btn, className, {
 				[styles.transparent]: type == 'transparent',
 				[styles.white]: type == 'white',
 				[styles.primary]: type == 'primary',

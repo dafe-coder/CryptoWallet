@@ -8,12 +8,14 @@ import {
 	setCurrentPage,
 	setShowErrorVerification,
 	setShowSuccessVerification,
-} from '../../actions'
-import { setWord3 } from './../../actions'
+} from '../../actions/createActions'
+import { setWord3 } from '../../actions/createActions'
 import { useDispatch } from 'react-redux'
 
 const VerificatePhrase3 = () => {
-	const { word1, word2, word3, phraseArr } = useSelector((state) => state)
+	const { word1, word2, word3, phraseArr } = useSelector(
+		(state) => state.create
+	)
 	const dispatch = useDispatch()
 
 	const goToNextPage = () => {

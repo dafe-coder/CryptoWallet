@@ -5,12 +5,16 @@ import styles from './input.module.css'
 import cn from 'classnames'
 import ShowPass from './../ShowPass/ShowPass'
 
-import { setPassword, setPasswordMatch, setPasswordValid } from '../../actions'
+import {
+	setPassword,
+	setPasswordMatch,
+	setPasswordValid,
+} from '../../actions/createActions'
 import { useDispatch, useSelector } from 'react-redux'
 
 const InputPass = ({ id, label }) => {
 	const dispatch = useDispatch()
-	const { passwordCheck, passwordValid } = useSelector((state) => state)
+	const { passwordCheck, passwordValid } = useSelector((state) => state.create)
 	const [uppercaseValid, setUppercaseValid] = useState(false)
 	const [specCharValid, setSpecCharValid] = useState(false)
 	const [numberValid, setNumberValid] = useState(false)

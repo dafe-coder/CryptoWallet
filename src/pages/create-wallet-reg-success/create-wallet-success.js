@@ -7,7 +7,7 @@ import BoxWithIcon from './../../components/BoxWithIcon/BoxWithIcon'
 import ConfirmInfo from './../../components/ConfirmInfo/ConfirmInfo'
 import Button from './../../components/Button/Button'
 import { useDispatch } from 'react-redux'
-import { setCurrentPage } from '../../actions'
+import { setCurrentPage } from '../../actions/createActions'
 import { useState } from 'react'
 
 const CreateWalletSuccess = () => {

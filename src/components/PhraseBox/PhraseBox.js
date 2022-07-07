@@ -12,7 +12,7 @@ const PhraseBox = ({
 	setWord,
 }) => {
 	const { phraseArr, phrase, phraseArrScattered } = useSelector(
-		(state) => state
+		(state) => state.create
 	)
 	const [copied, setCopied] = useState(false)
 	const dispatch = useDispatch()

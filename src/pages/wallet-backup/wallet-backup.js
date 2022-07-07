@@ -11,7 +11,7 @@ import {
 	setPhraseArr,
 	setCurrentPage,
 	setPhraseArrScattered,
-} from './../../actions'
+} from '../../actions/createActions'
 
 const WalletBackup = () => {
 	const dispatch = useDispatch()

@@ -2,7 +2,7 @@ const initialState = {
 	phrase: '',
 	phraseArr: [],
 	phraseArrScattered: [],
-	currentPage: 'Home',
+	currentPage: 'RestoreWalletLog',
 	password: '',
 	passwordCheck: '',
 	passwordMatch: null,
@@ -14,7 +14,7 @@ const initialState = {
 	showErrorVerification: false,
 	showSuccessVerification: false,
 }
-const reducer = (state = initialState, action) => {
+const create = (state = initialState, action) => {
 	switch (action.type) {
 		case 'SET_PHRASE':
 			return {
@@ -91,4 +91,4 @@ const reducer = (state = initialState, action) => {
 	}
 }
 
-export default reducer
+export default create

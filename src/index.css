@@ -62,13 +62,15 @@ html {
 	--warning: #FAD200;
 }
 
-
 .btn {
 	border-radius: 8px;
 	border: 2px solid var(--white);
 	padding: 16px 20px;
 	cursor: pointer;
 	transition: all ease 0.2s;
+}
+.btn-svg {
+	margin-right: 10px;
 }
 button.disabled {
     color: var(--disabled);
@@ -79,9 +81,8 @@ button.disabled {
     line-height: 20px;
     cursor: not-allowed;
 }
-.btn i {
-	margin-right: 10px;
-	font-family: 'FontAwesome Thin';
+button.disabled svg {
+	fill: var(--disabled)
 }
 
 .btn-list-row {

@@ -5,11 +5,11 @@ import cn from 'classnames'
 import ShowPass from './../ShowPass/ShowPass'
 import styles from './input.module.css'
 import { useDispatch, useSelector } from 'react-redux'
-import { setPasswordMatch, setPasswordCheck } from './../../actions'
+import { setPasswordMatch, setPasswordCheck } from '../../actions/createActions'
 
 const InputPassCheck = ({ id, label, errorPar }) => {
 	const dispatch = useDispatch()
-	const { passwordMatch, password } = useSelector((state) => state)
+	const { passwordMatch, password } = useSelector((state) => state.create)
 
 	const [marginInput, setMarginInput] = useState(null)
 	const [passwordCheck, setPassCheck] = useState('')

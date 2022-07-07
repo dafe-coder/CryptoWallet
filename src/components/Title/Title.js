@@ -8,6 +8,7 @@ const Title = ({ type = 'md', children }) => {
 			className={cn(styles.title, {
 				[styles.sm]: type == 'sm',
 				[styles.md]: type == 'md',
+				[styles.subtitle]: type == 'subtitle',
 				[styles.success]: type == 'success',
 				[styles.error]: type == 'error',
 				[styles.error_sm]: type == 'error-sm',

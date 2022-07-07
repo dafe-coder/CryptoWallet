@@ -4,12 +4,12 @@ import Title from '../../components/Title/Title'
 import Button from '../../components/Button/Button'
 import PhraseBox from '../../components/PhraseBox/PhraseBox'
 import { useSelector } from 'react-redux'
-import { setCurrentPage } from '../../actions'
-import { setWord2 } from './../../actions'
+import { setCurrentPage } from '../../actions/createActions'
+import { setWord2 } from '../../actions/createActions'
 import { useDispatch } from 'react-redux'
 
 const VerificatePhrase2 = () => {
-	const { word2 } = useSelector((state) => state)
+	const { word2 } = useSelector((state) => state.create)
 	const dispatch = useDispatch()
 
 	const goToNextPage = () => {

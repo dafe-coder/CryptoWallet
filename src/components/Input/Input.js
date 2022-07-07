@@ -1,5 +1,4 @@
 import React from 'react'
-import { useState } from 'react'
 import InputPass from './InputPass'
 import InputName from './InputName'
 import InputPassCheck from './InputPassCheck'

@@ -10,10 +10,10 @@ import QRCode from 'react-qr-code'
 import { useState } from 'react'
 import { useSelector } from 'react-redux'
 import { useDispatch } from 'react-redux'
-import { setCurrentPage } from '../../actions'
+import { setCurrentPage } from '../../actions/createActions'
 const CreatePhrase = () => {
 	const [openQr, setOpenQr] = useState(false)
-	const { phrase } = useSelector((state) => state)
+	const { phrase } = useSelector((state) => state.create)
 	const dispatch = useDispatch()
 
 	const goToVereficatePhrase = () => {
