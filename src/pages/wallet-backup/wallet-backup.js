@@ -6,6 +6,8 @@ import { useDispatch } from 'react-redux'
 import Title from '../../components/Title/Title'
 import Button from '../../components/Button/Button'
 import Par from '../../components/Par/Par'
+import GoBack from '../../components/GoBack/GoBack'
+
 import {
 	setPhrase,
 	setPhraseArr,
@@ -38,6 +40,7 @@ const WalletBackup = () => {
 	}
 	return (
 		<section className={cn('bg-white')}>
+			<GoBack goTo='CreateWalletSuccess' />
 			<Title>Back Up Wallet</Title>
 			<div className='wallet_body'>
 				<div className='wallet_body__top'>

@@ -7,6 +7,7 @@ import { useSelector } from 'react-redux'
 import { setCurrentPage } from '../../actions/createActions'
 import { setWord1 } from '../../actions/createActions'
 import { useDispatch } from 'react-redux'
+import GoBack from '../../components/GoBack/GoBack'
 
 const VerificatePhrase1 = () => {
 	const { word1 } = useSelector((state) => state.create)
@@ -16,6 +17,7 @@ const VerificatePhrase1 = () => {
 	}
 	return (
 		<section className={cn('bg-white')}>
+			<GoBack goTo='CreatePhrase' />
 			<Title>Back Up Wallet</Title>
 			<div className='wallet_body'>
 				<div className='wallet_body__top'>

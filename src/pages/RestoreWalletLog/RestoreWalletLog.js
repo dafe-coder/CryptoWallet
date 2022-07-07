@@ -2,12 +2,15 @@ import React from 'react'
 import Button from '../../components/Button/Button'
 import Title from '../../components/Title/Title'
 import AccountCard from '../../components/AccountCard/AccountCard'
+import GoBack from '../../components/GoBack/GoBack'
+
 const RestoreWalletLog = () => {
 	const goReg = () => {
 		alert('Success')
 	}
 	return (
 		<section className='bg-white'>
+			<GoBack goTo='RestoreWalletReg' />
 			<Title>Restore Wallet</Title>
 			<div className='wallet_body'>
 				<div className='wallet_body__top'>

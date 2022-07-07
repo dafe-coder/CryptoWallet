@@ -9,6 +9,7 @@ import Button from './../../components/Button/Button'
 import { useDispatch } from 'react-redux'
 import { setCurrentPage } from '../../actions/createActions'
 import { useState } from 'react'
+import GoBack from './../../components/GoBack/GoBack'
 
 const CreateWalletSuccess = () => {
 	const dispatch = useDispatch()
@@ -24,6 +25,7 @@ const CreateWalletSuccess = () => {
 
 	return (
 		<section className={cn('bg-white')}>
+			<GoBack goTo='CreateWalletReg' />
 			<Title>Create Wallet</Title>
 			<div className='wallet_body'>
 				<div className='wallet_body__top'>

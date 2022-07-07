@@ -5,6 +5,7 @@ import { setCurrentPage } from '../../actions/createActions'
 import { useDispatch, useSelector } from 'react-redux'
 import RestoreCountWords from '../../components/RestoreCountWordsList/RestoreCountWords'
 import cn from 'classnames'
+import GoBack from './../../components/GoBack/GoBack'
 
 const WalletRestore = () => {
 	const dispatch = useDispatch()
@@ -16,6 +17,7 @@ const WalletRestore = () => {
 	}
 	return (
 		<section className='bg-white'>
+			<GoBack goTo='Home' />
 			<Title>Restore Wallet</Title>
 			<div className='wallet_body'>
 				<div className='wallet_body__top'>

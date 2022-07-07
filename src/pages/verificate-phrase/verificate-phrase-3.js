@@ -11,6 +11,7 @@ import {
 } from '../../actions/createActions'
 import { setWord3 } from '../../actions/createActions'
 import { useDispatch } from 'react-redux'
+import GoBack from '../../components/GoBack/GoBack'
 
 const VerificatePhrase3 = () => {
 	const { word1, word2, word3, phraseArr } = useSelector(
@@ -32,6 +33,7 @@ const VerificatePhrase3 = () => {
 	}
 	return (
 		<section className={cn('bg-white')}>
+			<GoBack goTo='VerificatePhrase2' />
 			<Title>Back Up Wallet</Title>
 			<div className='wallet_body'>
 				<div className='wallet_body__top'>
