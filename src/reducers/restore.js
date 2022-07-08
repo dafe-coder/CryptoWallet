@@ -1,5 +1,6 @@
 const initialState = {
 	restorePhrase: '',
+	restorePhraseArr: [],
 	restorePhraseValid: null,
 	chooseCountWordRestore: '',
 }
@@ -10,6 +11,11 @@ const restore = (state = initialState, action) => {
 			return {
 				...state,
 				restorePhrase: action.payload,
+			}
+		case 'SET_RESTORE_PHRASE_ARR':
+			return {
+				...state,
+				restorePhraseArr: action.payload,
 			}
 		case 'SET_RESTORE_PHRASE_VALID':
 			return {

@@ -3,6 +3,7 @@ const initialState = {
 	phraseArr: [],
 	phraseArrScattered: [],
 	currentPage: 'RestoreWalletLog',
+	name: '',
 	password: '',
 	passwordCheck: '',
 	passwordMatch: null,
@@ -32,9 +33,17 @@ const create = (state = initialState, action) => {
 				phraseArrScattered: action.payload,
 			}
 		case 'SET_CURRENT_PAGE':
+			chrome.storage.session.set({ currentPage: action.payload }, function () {
+				console.log('Value is set to ' + action.payload)
+			})
 			return {
 				...state,
 				currentPage: action.payload,
+			}
+		case 'SET_NAME':
+			return {
+				...state,
+				name: action.payload,
 			}
 		case 'SET_PASSWORD':
 			return {

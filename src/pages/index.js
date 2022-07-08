@@ -8,22 +8,30 @@ import VerificatePhrase1 from './verificate-phrase/verificate-phrase-1'
 import VerificatePhrase2 from './verificate-phrase/verificate-phrase-2'
 import VerificatePhrase3 from './verificate-phrase/verificate-phrase-3'
 import WalletRestore from './wallet-restore/wallet-restore'
-import RestoreWalletReg from './restore-wallet-reg/restore-wallet-reg'
-import RestoreWalletLog from './RestoreWalletLog/RestoreWalletLog'
+import RestoreWalletReg from './wallet-restore-reg/wallet-restore-reg'
+import RestoreWalletLog from './wallet-restore-log/wallet-restore-log'
 import Modal from '../components/modal/Modal'
 import Title from '../components/Title/Title'
-
-import { useSelector } from 'react-redux'
+import { useEffect } from 'react'
+import { useSelector, useDispatch } from 'react-redux'
 
 import {
+	setCurrentPage,
 	setShowErrorVerification,
 	setShowSuccessVerification,
 } from '../actions/createActions'
 
 const Pages = () => {
+	const dispatch = useDispatch()
 	const { currentPage, showErrorVerification, showSuccessVerification } =
 		useSelector((state) => state.create)
-
+	useEffect(() => {
+		chrome.storage.session.get(['currentPage'], function (result) {
+			if (result.currentPage && result.currentPage.length > 3) {
+				dispatch(setCurrentPage(result.currentPage))
+			}
+		})
+	}, [])
 	const renderPages = () => {
 		switch (currentPage) {
 			case 'Home':

@@ -6,6 +6,7 @@ const NodePolyfillPlugin = require('node-polyfill-webpack-plugin')
 module.exports = {
 	entry: {
 		popup: path.resolve('src/index.js'),
+		background: path.resolve('src/background/background.js'),
 		contentScript: path.resolve('src/contentScript/contentScript.js'),
 	},
 	module: {

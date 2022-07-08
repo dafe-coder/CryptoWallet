@@ -14,13 +14,14 @@ import { useDispatch, useSelector } from 'react-redux'
 
 const InputPass = ({ id, label }) => {
 	const dispatch = useDispatch()
-	const { passwordCheck, passwordValid } = useSelector((state) => state.create)
+	const { passwordCheck, passwordValid, password } = useSelector(
+		(state) => state.create
+	)
 	const [uppercaseValid, setUppercaseValid] = useState(false)
 	const [specCharValid, setSpecCharValid] = useState(false)
 	const [numberValid, setNumberValid] = useState(false)
 	const [lengthValid, setLengthValid] = useState(false)
 	const [marginInput, setMarginInput] = useState(null)
-	const [pass, setPass] = useState('')
 
 	function onBlur(value) {
 		if (value.length > 0) {
@@ -43,7 +44,6 @@ const InputPass = ({ id, label }) => {
 		let letterSpecialChars = false
 		let number = false
 		let length = false
-		setPass(value)
 		dispatch(setPassword(value))
 		checkPassValid(value)
 
@@ -89,7 +89,7 @@ const InputPass = ({ id, label }) => {
 		<div
 			className={styles.wallet_input}
 			style={
-				marginInput || pass.length > 1
+				marginInput || password.length > 1
 					? { marginTop: '40px' }
 					: { marginTop: 0 }
 			}>
@@ -97,11 +97,12 @@ const InputPass = ({ id, label }) => {
 			<input
 				onInput={(e) => onInputValidate(e)}
 				onFocus={() => setMarginInput(true)}
-				onBlur={() => onBlur(pass)}
+				onBlur={() => onBlur(password)}
 				className={cn(styles.input, {
 					[styles.success]: passwordValid == true,
 					[styles.warning]: passwordValid == false,
 				})}
+				value={password}
 				type='password'
 				id={id}
 				name='name'

@@ -4,13 +4,12 @@ import Par from '../Par/Par'
 import styles from './input.module.css'
 import cn from 'classnames'
 import { useSelector, useDispatch } from 'react-redux'
-import { setNameValid } from '../../actions/createActions'
+import { setNameValid, setName } from '../../actions/createActions'
 
 const InputName = ({ id, label, errorPar }) => {
-	const [name, setName] = useState('')
 	const [marginInput, setMarginInput] = useState(null)
 
-	const { nameValid } = useSelector((state) => state.create)
+	const { nameValid, name } = useSelector((state) => state.create)
 	const dispatch = useDispatch()
 
 	function onBlur(value) {
@@ -22,7 +21,7 @@ const InputName = ({ id, label, errorPar }) => {
 	}
 	const onNameValidate = (e) => {
 		let name = e.target.value
-		setName(name)
+		dispatch(setName(name))
 
 		if (name.length > 1 && name.length <= 40) {
 			dispatch(setNameValid(true))

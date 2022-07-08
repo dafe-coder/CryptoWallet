@@ -4,6 +4,12 @@ export const setRestorePhrase = (phrase) => {
 		payload: phrase,
 	}
 }
+export const setRestorePhraseArr = (phrase) => {
+	return {
+		type: 'SET_RESTORE_PHRASE_ARR',
+		payload: phrase,
+	}
+}
 export const setRestorePhraseValid = (valid) => {
 	return {
 		type: 'SET_RESTORE_PHRASE_VALID',

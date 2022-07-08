@@ -7,15 +7,14 @@ import { useSelector, useDispatch } from 'react-redux'
 import {
 	setRestorePhrase,
 	setRestorePhraseValid,
+	setRestorePhraseArr,
 } from '../../actions/restoreActions'
 
 const Textarea = ({ id, label, errorPar }) => {
-	const [phrase, setPhrase] = useState('')
 	const [marginInput, setMarginInput] = useState(null)
 
-	const { restorePhraseValid, chooseCountWordRestore } = useSelector(
-		(state) => state.restore
-	)
+	const { restorePhraseValid, chooseCountWordRestore, restorePhrase } =
+		useSelector((state) => state.restore)
 	const dispatch = useDispatch()
 
 	function onBlur(value) {
@@ -28,9 +27,8 @@ const Textarea = ({ id, label, errorPar }) => {
 	const onNameValidate = (e) => {
 		let phrase = e.target.value
 		let phraseArr = phrase.trim().split(' ')
-		setPhrase(phrase)
-		dispatch(setRestorePhrase(phraseArr))
-		console.log(chooseCountWordRestore)
+		dispatch(setRestorePhrase(phrase))
+		dispatch(setRestorePhraseArr(phraseArr))
 		if (phraseArr.length == +chooseCountWordRestore) {
 			dispatch(setRestorePhraseValid(true))
 		} else if ('own' == chooseCountWordRestore && phraseArr.length > 1) {
@@ -44,14 +42,14 @@ const Textarea = ({ id, label, errorPar }) => {
 		<div
 			className={styles.wallet_input}
 			style={
-				marginInput || phrase.length > 1
+				marginInput || restorePhrase.length > 1
 					? { marginTop: '40px' }
 					: { marginTop: 0 }
 			}>
 			<textarea
 				onInput={(e) => onNameValidate(e)}
 				onFocus={() => setMarginInput(true)}
-				onBlur={() => onBlur(phrase)}
+				onBlur={() => onBlur(restorePhrase)}
 				className={cn(styles.textarea, {
 					[styles.success]: restorePhraseValid == true,
 					[styles.error]: restorePhraseValid == false,
@@ -60,7 +58,7 @@ const Textarea = ({ id, label, errorPar }) => {
 				id={id}
 				phrase='phrase'
 				required={true}
-				value={phrase}></textarea>
+				value={restorePhrase}></textarea>
 			<label className={styles.label} htmlFor={id}>
 				{label}
 			</label>

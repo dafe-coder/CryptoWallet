@@ -9,10 +9,11 @@ import { setPasswordMatch, setPasswordCheck } from '../../actions/createActions'
 
 const InputPassCheck = ({ id, label, errorPar }) => {
 	const dispatch = useDispatch()
-	const { passwordMatch, password } = useSelector((state) => state.create)
+	const { passwordMatch, password, passwordCheck } = useSelector(
+		(state) => state.create
+	)
 
 	const [marginInput, setMarginInput] = useState(null)
-	const [passwordCheck, setPassCheck] = useState('')
 
 	const checkPassValid = (value) => {
 		console.log(passwordMatch)
@@ -32,7 +33,6 @@ const InputPassCheck = ({ id, label, errorPar }) => {
 	const onPassCheckValidate = (e) => {
 		let value = e.target.value
 		dispatch(setPasswordCheck(value))
-		setPassCheck(value)
 		checkPassValid(value)
 	}
 	return (

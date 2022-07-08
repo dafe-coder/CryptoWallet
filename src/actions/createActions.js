@@ -22,6 +22,12 @@ export const setCurrentPage = (pageSelector) => {
 		payload: pageSelector,
 	}
 }
+export const setName = (name) => {
+	return {
+		type: 'SET_NAME',
+		payload: name,
+	}
+}
 export const setPassword = (password) => {
 	return {
 		type: 'SET_PASSWORD',
