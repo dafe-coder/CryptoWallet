@@ -23,3 +23,7 @@
     justify-content: center;
     align-items: center;
 }
+
+.svg_right svg {
+    margin-left: 10px;
+}

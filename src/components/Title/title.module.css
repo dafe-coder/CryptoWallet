@@ -44,6 +44,15 @@
 	line-height: 18px;
 	text-align: center;
 }
+.error_sm_alert {
+	text-transform: uppercase;
+	color: var(--error);
+	margin: 0 0 10px;
+	font-weight: 600;
+	font-size: 12px;
+	line-height: 18px;
+	text-align: left;
+}
 .error {
 	color: var(--error);
 	margin: 0 0 10px;

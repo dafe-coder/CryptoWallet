@@ -9,6 +9,8 @@ const Button = ({
 	id = null,
 	onClick,
 	arrow = false,
+	positionSvg,
+	style,
 }) => {
 	function onClickFunc() {
 		if (onClick) {
@@ -19,6 +21,7 @@ const Button = ({
 	}
 	return (
 		<button
+			style={style}
 			type='button'
 			onClick={onClickFunc}
 			id={id}
@@ -26,6 +29,7 @@ const Button = ({
 				[styles.transparent]: type == 'transparent',
 				[styles.white]: type == 'white',
 				[styles.primary]: type == 'primary',
+				[styles.svg_right]: positionSvg == 'right',
 			})}>
 			{children}
 			{arrow ? (

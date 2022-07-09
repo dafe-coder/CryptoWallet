@@ -9,3 +9,7 @@
     border-color: var(--error);
     color: var(--error);
 }
+
+.icon {
+    margin-right: 10px;
+}

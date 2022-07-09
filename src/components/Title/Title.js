@@ -12,6 +12,7 @@ const Title = ({ type = 'md', children }) => {
 				[styles.success]: type == 'success',
 				[styles.error]: type == 'error',
 				[styles.error_sm]: type == 'error-sm',
+				[styles.error_sm_alert]: type == 'error-sm-alert',
 			})}>
 			{children}
 		</h2>

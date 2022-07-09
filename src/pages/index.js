@@ -13,7 +13,7 @@ import RestoreWalletLog from './wallet-restore-log/wallet-restore-log'
 import Modal from '../components/modal/Modal'
 import Title from '../components/Title/Title'
 import ChooseAssets from './choose-assets/choose-assets'
-
+import CustomToken from './custom-token/custom-token'
 import { useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import Wallet from './wallet/wallet'
@@ -62,6 +62,8 @@ const Pages = () => {
 				return <Wallet />
 			case 'ChooseAssets':
 				return <ChooseAssets />
+			case 'CustomToken':
+				return <CustomToken />
 			default:
 				return <></>
 		}
