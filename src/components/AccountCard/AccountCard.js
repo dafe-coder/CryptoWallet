@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react'
 
 const AccountCard = () => {
 	const apiKey = 'ckey_2b56a98c14d8454b8afe42afbfd'
-	const apiAddress = '0x5dF298a7320D31d543484742ca2A0F65aF242C53'
+	const apiAddress = '0x4fdbfd3f466079897b67d7623fb0b2845da5d1e6'
 
 	const [walletAddress, setWalletAddress] = useState('')
 	const [walletBalance, setWalletBalance] = useState(null)
@@ -13,7 +13,7 @@ const AccountCard = () => {
 			.then((response) => response.json())
 			.then(({ data }) => {
 				setWalletAddress(data.address)
-				setWalletBalance(data.items[0].balance)
+				setWalletBalance(data.items[1].balance)
 				console.log(data)
 			})
 			.catch((err) => console.error(err))

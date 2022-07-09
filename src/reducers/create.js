@@ -33,9 +33,11 @@ const create = (state = initialState, action) => {
 				phraseArrScattered: action.payload,
 			}
 		case 'SET_CURRENT_PAGE':
-			chrome.storage.session.set({ currentPage: action.payload }, function () {
-				console.log('Value is set to ' + action.payload)
-			})
+			// chrome.storage.session.set({ currentPage: action.payload }, function () {
+			// 	console.log('Value is set to ' + action.payload)
+			// })
+
+			chrome.storage.session.clear()
 			return {
 				...state,
 				currentPage: action.payload,

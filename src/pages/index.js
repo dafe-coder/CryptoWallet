@@ -14,7 +14,7 @@ import Modal from '../components/modal/Modal'
 import Title from '../components/Title/Title'
 import { useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-
+import Wallet from './wallet/wallet'
 import {
 	setCurrentPage,
 	setShowErrorVerification,
@@ -56,6 +56,8 @@ const Pages = () => {
 				return <RestoreWalletReg />
 			case 'RestoreWalletLog':
 				return <RestoreWalletLog />
+			case 'Wallet':
+				return <Wallet />
 			default:
 				return <></>
 		}
