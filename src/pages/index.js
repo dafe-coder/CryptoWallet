@@ -12,6 +12,8 @@ import RestoreWalletReg from './wallet-restore-reg/wallet-restore-reg'
 import RestoreWalletLog from './wallet-restore-log/wallet-restore-log'
 import Modal from '../components/modal/Modal'
 import Title from '../components/Title/Title'
+import ChooseAssets from './choose-assets/choose-assets'
+
 import { useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import Wallet from './wallet/wallet'
@@ -58,6 +60,8 @@ const Pages = () => {
 				return <RestoreWalletLog />
 			case 'Wallet':
 				return <Wallet />
+			case 'ChooseAssets':
+				return <ChooseAssets />
 			default:
 				return <></>
 		}
