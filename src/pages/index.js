@@ -14,9 +14,11 @@ import Modal from '../components/modal/Modal'
 import Title from '../components/Title/Title'
 import ChooseAssets from './choose-assets/choose-assets'
 import CustomToken from './custom-token/custom-token'
+import Wallet from './wallet/wallet'
+import Transactions from './transactions/transactions'
+
 import { useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import Wallet from './wallet/wallet'
 import {
 	setCurrentPage,
 	setShowErrorVerification,
@@ -64,6 +66,8 @@ const Pages = () => {
 				return <ChooseAssets />
 			case 'CustomToken':
 				return <CustomToken />
+			case 'Transactions':
+				return <Transactions />
 			default:
 				return <></>
 		}

@@ -2,7 +2,7 @@ const initialState = {
 	phrase: '',
 	phraseArr: [],
 	phraseArrScattered: [],
-	currentPage: 'CustomToken',
+	currentPage: 'Transactions',
 	name: '',
 	password: '',
 	passwordCheck: '',
@@ -37,7 +37,7 @@ const create = (state = initialState, action) => {
 			// 	console.log('Value is set to ' + action.payload)
 			// })
 
-			chrome.storage.session.clear()
+			// chrome.storage.session.clear()
 			return {
 				...state,
 				currentPage: action.payload,
