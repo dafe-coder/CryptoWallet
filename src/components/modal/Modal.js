@@ -2,8 +2,9 @@ import React from 'react'
 import cn from 'classnames'
 import styles from './modal.module.css'
 import { useDispatch } from 'react-redux'
+import Buttons from './../Buttons/Buttons'
 
-const Modal = ({ id, children, open, openFunc }) => {
+const Modal = ({ id, children, open, openFunc, padding = '30' }) => {
 	const dispatch = useDispatch()
 
 	const close = (e) => {
@@ -21,7 +22,14 @@ const Modal = ({ id, children, open, openFunc }) => {
 				[styles.active]: open == true,
 			})}
 			id={id}>
-			<div className={styles.body}>{children}</div>
+			<div
+				className={cn(styles.body, {
+					[styles.padding30]: padding == 30,
+					[styles.padding20]: padding == 20,
+				})}>
+				<Buttons type='close' className={styles.close}></Buttons>
+				{children}
+			</div>
 		</div>
 	)
 }

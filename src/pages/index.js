@@ -16,7 +16,7 @@ import ChooseAssets from './choose-assets/choose-assets'
 import CustomToken from './custom-token/custom-token'
 import Wallet from './wallet/wallet'
 import Transactions from './transactions/transactions'
-
+import Accounts from './accounts/accounts'
 import { useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import {
@@ -68,6 +68,8 @@ const Pages = () => {
 				return <CustomToken />
 			case 'Transactions':
 				return <Transactions />
+			case 'Accounts':
+				return <Accounts />
 			default:
 				return <></>
 		}

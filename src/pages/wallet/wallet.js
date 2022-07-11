@@ -1,17 +1,22 @@
 import React from 'react'
 import { useDispatch } from 'react-redux'
-import WalletHeader from './../../components/WalletHeader/WalletHeader'
 import ApexChart from '../../components/PieChar/PieChar'
 import styles from './wallet.module.css'
 import PortfolioList from './../../components/PortfolioList/PortfolioList'
 import TransferBtn from '../../components/TransferBtn/TransferBtn'
+import Title from '../../components/Title/Title'
+import Buttons from './../../components/Buttons/Buttons'
 
 const Wallet = () => {
 	const dispatch = useDispatch()
 	return (
 		<section className={'bg-white'}>
 			<div className='wallet-body'>
-				<WalletHeader />
+				<div className='wallet-header' style={{ marginBottom: '20px' }}>
+					<Buttons type='notification'></Buttons>
+					<Title>Your Account</Title>
+					<Buttons type='settings'></Buttons>
+				</div>
 				<div className='wallet-top' style={{ position: 'relative' }}>
 					<TransferBtn type='send'>Transfer</TransferBtn>
 					<ApexChart />

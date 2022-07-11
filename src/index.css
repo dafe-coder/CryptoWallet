@@ -156,3 +156,14 @@ section {
 .apexcharts-legend {
 	display: none !important;	
 }
+
+.wallet-header {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	margin-bottom: 30px;
+}
+
+.wallet-header h2 {
+	margin-bottom: 0;
+}

@@ -2,7 +2,7 @@ import React from 'react'
 import cn from 'classnames'
 import styles from './title.module.css'
 
-const Title = ({ type = 'md', children }) => {
+const Title = ({ type = 'md', color = 'primary', children, mb = '30' }) => {
 	return (
 		<h2
 			className={cn(styles.title, {
@@ -13,6 +13,10 @@ const Title = ({ type = 'md', children }) => {
 				[styles.error]: type == 'error',
 				[styles.error_sm]: type == 'error-sm',
 				[styles.error_sm_alert]: type == 'error-sm-alert',
+				[styles.dark]: color == 'dark',
+				[styles.primary]: color == 'primary',
+				[styles.mb_20]: mb == '20',
+				[styles.mb_30]: mb == '30',
 			})}>
 			{children}
 		</h2>

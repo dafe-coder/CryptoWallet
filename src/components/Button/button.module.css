@@ -27,3 +27,22 @@
 .svg_right svg {
     margin-left: 10px;
 }
+.svg_left svg {
+    margin-right: 10px;
+}
+.transparent_primary {
+    border: 1px solid var(--primary);
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 20px;
+    color: var(--primary);
+    width: 100%;
+    background: transparent
+}
+.transparent_primary svg {
+    fill: var(--primary)
+}
+.mb {
+    margin-bottom: 10px;
+}

@@ -33,3 +33,27 @@
 .body svg {
     margin-bottom: 30px;
 }
+.body h2 {
+    margin-top: 0;
+}
+button.close {
+    position: absolute;
+    right: 20px;
+    top: 23px;
+    border: none;
+    background: transparent;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+button.close svg {
+    margin-bottom: 0;
+}
+
+.padding30 {
+    padding: 30px;
+}
+
+.padding20 {
+    padding: 20px;
+}
