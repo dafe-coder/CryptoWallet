@@ -28,6 +28,7 @@ const Home = () => {
 					Create wallet
 				</Button>
 				<Button
+					mt='0'
 					type='transparent'
 					onClick={() => dispatch(setCurrentPage('WalletRestore'))}>
 					<svg

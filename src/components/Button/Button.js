@@ -12,7 +12,7 @@ const Button = ({
 	positionSvg,
 	style,
 	mb = false,
-	mt = false,
+	mt = '',
 }) => {
 	function onClickFunc() {
 		if (onClick) {
@@ -37,6 +37,7 @@ const Button = ({
 				[styles.border_error]: type == 'border-error',
 				[styles.mb]: mb == true,
 				[styles.mt]: mt == true,
+				[styles.mt_0]: mt == '0',
 			})}>
 			{children}
 			{arrow ? (

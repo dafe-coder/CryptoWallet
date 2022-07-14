@@ -34,7 +34,7 @@ const InputPassLog = ({ id, label, errorPar }) => {
 			<ShowPass walletInput={styles.wallet_input} />
 			<input
 				onChange={(e) => setPassLog(e.target.value)}
-				className={styles.input}
+				className={'input'}
 				onFocus={() => setMarginInput(true)}
 				onBlur={() => onBlur(passwordCheck)}
 				type='password'
@@ -43,7 +43,7 @@ const InputPassLog = ({ id, label, errorPar }) => {
 				required={true}
 				value={passLog}
 			/>
-			<label className={styles.label} htmlFor={id}>
+			<label className='label' htmlFor={id}>
 				{label}
 			</label>
 			{errorPar ? (

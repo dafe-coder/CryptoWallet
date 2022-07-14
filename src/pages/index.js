@@ -20,6 +20,8 @@ import Accounts from './accounts/accounts'
 import ManageAccounts from './manage-account/manage-account'
 import WelcomeBack from './welcome-back/welcome-back'
 import TransactionsHistory from './transactions-history/transactions-history'
+import Sent from './sent/sent'
+
 import { useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 
@@ -82,6 +84,8 @@ const Pages = () => {
 				return <WelcomeBack />
 			case 'TransactionsHistory':
 				return <TransactionsHistory />
+			case 'Sent':
+				return <Sent />
 			default:
 				return <></>
 		}

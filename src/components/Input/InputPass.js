@@ -21,15 +21,7 @@ const InputPass = ({ id, label }) => {
 	const [specCharValid, setSpecCharValid] = useState(false)
 	const [numberValid, setNumberValid] = useState(false)
 	const [lengthValid, setLengthValid] = useState(false)
-	const [marginInput, setMarginInput] = useState(null)
 
-	function onBlur(value) {
-		if (value.length > 0) {
-			setMarginInput(true)
-		} else {
-			setMarginInput(false)
-		}
-	}
 	const checkPassValid = (value) => {
 		if (value === passwordCheck) {
 			dispatch(setPasswordMatch(true))
@@ -86,31 +78,25 @@ const InputPass = ({ id, label }) => {
 		}
 	}
 	return (
-		<div
-			className={styles.wallet_input}
-			style={
-				marginInput || password.length > 1
-					? { marginTop: '40px' }
-					: { marginTop: 0 }
-			}>
-			<ShowPass walletInput={styles.wallet_input} />
-			<input
-				onInput={(e) => onInputValidate(e)}
-				onFocus={() => setMarginInput(true)}
-				onBlur={() => onBlur(password)}
-				className={cn(styles.input, {
-					[styles.success]: passwordValid == true,
-					[styles.warning]: passwordValid == false,
-				})}
-				value={password}
-				type='password'
-				id={id}
-				name='name'
-				required={true}
-			/>
-			<label className={styles.label} htmlFor={id}>
-				{label}
-			</label>
+		<div className={styles.wallet_input}>
+			<div className='pos-r'>
+				<ShowPass walletInput={styles.wallet_input} />
+				<input
+					onInput={(e) => onInputValidate(e)}
+					className={cn('input', {
+						[styles.success]: passwordValid == true,
+						[styles.warning]: passwordValid == false,
+					})}
+					value={password}
+					type='password'
+					id={id}
+					name='name'
+					required={true}
+				/>
+				<label className='label' htmlFor={id}>
+					{label}
+				</label>
+			</div>
 			<ValidIndicatorsPass
 				lengthValid={lengthValid}
 				numberValid={numberValid}

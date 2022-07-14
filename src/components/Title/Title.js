@@ -16,6 +16,7 @@ const Title = ({ type = 'md', color = 'primary', children, mb = '30', mt }) => {
 				[styles.dark]: color == 'dark',
 				[styles.primary]: color == 'primary',
 				[styles.mt]: mt == true,
+				[styles.m_0]: mb == '0',
 				[styles.mt_30]: mt == '30',
 				[styles.mb_20]: mb == '20',
 				[styles.mb_30]: mb == '30',

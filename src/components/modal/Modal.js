@@ -33,9 +33,9 @@ const Modal = ({
 			id={id}>
 			<div
 				className={cn(white ? styles.white_body : styles.body, {
-					[styles.padding30]: padding == 30,
-					[styles.padding20]: padding == 20,
-					[styles.padding0]: padding == 0,
+					[styles.padding30]: padding == '30',
+					[styles.padding20]: padding == '20',
+					[styles.padding0]: padding == '0',
 				})}>
 				{closeIcon ? (
 					<Buttons type='close' className={styles.close}></Buttons>

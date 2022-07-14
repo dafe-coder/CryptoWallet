@@ -49,6 +49,9 @@
     color: var(--error);
     background: transparent;
 }
+.mt_0 {
+    margin-top: 0;
+}
 .mb {
     margin-bottom: 10px;
 }

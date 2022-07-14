@@ -1,5 +1,4 @@
 import React from 'react'
-import { useState } from 'react'
 import Par from '../Par/Par'
 import styles from './input.module.css'
 import cn from 'classnames'
@@ -7,18 +6,9 @@ import { useSelector, useDispatch } from 'react-redux'
 import { setNameValid, setName } from '../../actions/createActions'
 
 const InputName = ({ id, label, errorPar }) => {
-	const [marginInput, setMarginInput] = useState(null)
-
 	const { nameValid, name } = useSelector((state) => state.create)
 	const dispatch = useDispatch()
 
-	function onBlur(value) {
-		if (value.length > 0) {
-			setMarginInput(true)
-		} else {
-			setMarginInput(false)
-		}
-	}
 	const onNameValidate = (e) => {
 		let name = e.target.value
 		dispatch(setName(name))
@@ -30,18 +20,10 @@ const InputName = ({ id, label, errorPar }) => {
 		}
 	}
 	return (
-		<div
-			className={styles.wallet_input}
-			style={
-				marginInput || name.length > 1
-					? { marginTop: '40px' }
-					: { marginTop: 0 }
-			}>
+		<div className={styles.wallet_input}>
 			<input
 				onInput={(e) => onNameValidate(e)}
-				onFocus={() => setMarginInput(true)}
-				onBlur={() => onBlur(name)}
-				className={cn(styles.input, {
+				className={cn('input', {
 					[styles.success]: nameValid == true,
 					[styles.error]: nameValid == false,
 				})}
@@ -51,7 +33,7 @@ const InputName = ({ id, label, errorPar }) => {
 				required={true}
 				value={name}
 			/>
-			<label className={styles.label} htmlFor={id}>
+			<label className='label' htmlFor={id}>
 				{label}
 			</label>
 			{errorPar ? (
