@@ -15,14 +15,14 @@ const TransactionBtn = ({ type }) => {
 			return (
 				<button className={styles.btn}>
 					<SvgTransactions type='arr-bottom' />
-					Send
+					Receive
 				</button>
 			)
 		case 'swap':
 			return (
 				<button className={styles.btn}>
 					<SvgTransactions type='swap' />
-					Send
+					Swap
 				</button>
 			)
 	}

@@ -23,11 +23,11 @@ const Accounts = () => {
 					<MyAccount />
 				</div>
 				<div className='wallet-bottom'>
-					<Button type='transparent-primary' positionSvg='left' mb={true}>
+					<Button type='border-primary' positionSvg='left' mb={true}>
 						<Svg type='plus' />
 						Add account
 					</Button>
-					<Button type='transparent-primary' positionSvg='left'>
+					<Button type='border-primary' positionSvg='left'>
 						<Svg type='upload' />
 						Import account
 					</Button>

@@ -9,11 +9,6 @@
 .primary {
     background: var(--primary);
     color: var(--white);
-    width: 100%;
-    font-size: 14px;
-    line-height: 20px;
-    cursor: pointer;
-    margin-top: 30px;
 }
 .arrow {
     margin-left: 10px;
@@ -22,6 +17,14 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    width: 100%;
+    font-size: 14px;
+    line-height: 20px;
+    cursor: pointer;
+    margin-top: 30px;
+    border-radius: 8px;
+    border: 1px solid;
+    font-weight: 600;
 }
 
 .svg_right svg {
@@ -30,19 +33,26 @@
 .svg_left svg {
     margin-right: 10px;
 }
-.transparent_primary {
-    border: 1px solid var(--primary);
-    border-radius: 8px;
-    font-weight: 600;
-    font-size: 14px;
-    line-height: 20px;
+.border_primary {
+    border-color: var(--primary);
     color: var(--primary);
-    width: 100%;
-    background: transparent
+    background: transparent;
 }
-.transparent_primary svg {
+.border_primary svg {
     fill: var(--primary)
+}
+.border_error svg {
+    fill: var(--error)
+}
+.border_error {
+    border-color: var(--error);
+    color: var(--error);
+    background: transparent;
 }
 .mb {
     margin-bottom: 10px;
+}
+
+.mt {
+    margin-top: 10px;
 }

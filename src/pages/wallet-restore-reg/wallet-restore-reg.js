@@ -8,7 +8,6 @@ const RestoreWalletReg = () => {
 	return (
 		<section className={cn('bg-white')}>
 			<GoBack goTo='WalletRestore' />
-
 			<Title>Create Wallet</Title>
 			<div className='wallet_body'>
 				<RestoreForm />

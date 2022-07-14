@@ -1,33 +1,30 @@
 import React from 'react'
 import PortfolioItem from '../PortfolioItem/PortfolioItem'
-import btcImg from './btc.png'
-import ethImg from './eth.png'
-import polImg from './polygon.png'
-
-const PortfolioList = ({ className }) => {
+import Web3 from 'web3'
+const PortfolioList = ({ className, data }) => {
 	return (
 		<ul className={className}>
-			<PortfolioItem
-				cryptoName='BTC'
-				cryptoCount='1'
-				cryptoPrice='50.213.33'
-				cryptoProfit='300.3%'
-				cryptoImg={btcImg}
-			/>
-			<PortfolioItem
-				cryptoName='ETH'
-				cryptoCount='22.2'
-				cryptoPrice='8.213.33'
-				cryptoProfit='300.3%'
-				cryptoImg={ethImg}
-			/>
-			<PortfolioItem
-				cryptoName='POLYGON'
-				cryptoCount='202.000.000'
-				cryptoPrice='213.33'
-				cryptoProfit='300.3%'
-				cryptoImg={polImg}
-			/>
+			{data ? (
+				data.map((item) => {
+					return (
+						<PortfolioItem
+							key={item.contract_name}
+							cryptoName={item.contract_ticker_symbol}
+							cryptoCount={Number(
+								Web3.utils.fromWei(String(item.balance), 'ether')
+							).toFixed(3)}
+							cryptoPrice={item.quote_rate}
+							cryptoProfit={(
+								(item.quote_rate / item.quote_rate_24h) * 100 -
+								100
+							).toFixed(3)}
+							cryptoImg={item.logo_url}
+						/>
+					)
+				})
+			) : (
+				<h2>Nothing</h2>
+			)}
 		</ul>
 	)
 }

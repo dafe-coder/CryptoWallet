@@ -17,8 +17,13 @@ import CustomToken from './custom-token/custom-token'
 import Wallet from './wallet/wallet'
 import Transactions from './transactions/transactions'
 import Accounts from './accounts/accounts'
+import ManageAccounts from './manage-account/manage-account'
+import WelcomeBack from './welcome-back/welcome-back'
+import TransactionsHistory from './transactions-history/transactions-history'
 import { useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
+
+import { setDataWallet } from '../actions/wallet'
 import {
 	setCurrentPage,
 	setShowErrorVerification,
@@ -29,6 +34,7 @@ const Pages = () => {
 	const dispatch = useDispatch()
 	const { currentPage, showErrorVerification, showSuccessVerification } =
 		useSelector((state) => state.create)
+
 	useEffect(() => {
 		chrome.storage.session.get(['currentPage'], function (result) {
 			if (result.currentPage && result.currentPage.length > 3) {
@@ -70,6 +76,12 @@ const Pages = () => {
 				return <Transactions />
 			case 'Accounts':
 				return <Accounts />
+			case 'ManageAccounts':
+				return <ManageAccounts />
+			case 'WelcomeBack':
+				return <WelcomeBack />
+			case 'TransactionsHistory':
+				return <TransactionsHistory />
 			default:
 				return <></>
 		}

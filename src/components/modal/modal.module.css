@@ -10,6 +10,20 @@
     transition: all ease .3s;
     padding: 30px;
 }
+.white {
+    background: var(--white);
+}
+.white_body {
+    width: calc(100% - 50px);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+}
 .active {
     opacity: 1;
     left: 0;
@@ -56,4 +70,7 @@ button.close svg {
 
 .padding20 {
     padding: 20px;
+}
+.padding0 {
+    padding: 0;
 }

@@ -1,6 +1,9 @@
 .title {
     text-align: center;
 }
+.primary {
+    color: var(--primary);
+}
 .md {
     color: var(--primary);
     text-align: center;
@@ -51,6 +54,22 @@
 	line-height: 18px;
 	text-align: left;
 }
+.dark {
+	color: var(--dark)
+}
+
+.mb_20 {
+	margin-bottom: 20px;
+}
+.mb_30 {
+	margin-bottom: 30px;
+}
+.mt {
+	margin-top: 0;
+}
+.mt_30 {
+	margin-top: 30px;
+}
 .error {
 	color: var(--error);
 	margin: 0 0 10px;
@@ -58,17 +77,4 @@
 	font-size: 16px;
 	line-height: 20px;
 	text-align: center;
-}
-
-.dark {
-	color: var(--dark)
-}
-.primary {
-    color: var(--primary);
-}
-.mb_20 {
-	margin-bottom: 20px;
-}
-.mb_30 {
-	margin-bottom: 30px;
 }

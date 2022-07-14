@@ -2,6 +2,7 @@ import React from 'react'
 import InputPass from './InputPass'
 import InputName from './InputName'
 import InputPassCheck from './InputPassCheck'
+import InputPassLog from './InputPassLog'
 
 const Input = ({ id, label, errorPar, type = 'normal' }) => {
 	switch (type) {
@@ -11,6 +12,10 @@ const Input = ({ id, label, errorPar, type = 'normal' }) => {
 			return <InputPass id={id} label={label} />
 		case 'password-check':
 			return <InputPassCheck id={id} label={label} errorPar={errorPar} />
+		case 'pass-log':
+			return <InputPassLog id={id} label={label} errorPar={errorPar} />
+		default:
+			return <></>
 	}
 }
 

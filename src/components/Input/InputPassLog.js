@@ -5,24 +5,16 @@ import cn from 'classnames'
 import ShowPass from '../ShowPass/ShowPass'
 import styles from './input.module.css'
 import { useDispatch, useSelector } from 'react-redux'
-import { setPasswordMatch, setPasswordCheck } from '../../actions/createActions'
 
-const InputPassCheck = ({ id, label, errorPar }) => {
+const InputPassLog = ({ id, label, errorPar }) => {
 	const dispatch = useDispatch()
 	const { passwordMatch, password, passwordCheck } = useSelector(
 		(state) => state.create
 	)
 
-	const [marginInput, setMarginInput] = useState(null)
+	const [passLog, setPassLog] = useState('')
 
-	const checkPassValid = (value) => {
-		console.log(passwordMatch)
-		if (password === value) {
-			dispatch(setPasswordMatch(true))
-		} else {
-			dispatch(setPasswordMatch(false))
-		}
-	}
+	const [marginInput, setMarginInput] = useState(null)
 	function onBlur(value) {
 		if (value.length > 0) {
 			setMarginInput(true)
@@ -30,11 +22,7 @@ const InputPassCheck = ({ id, label, errorPar }) => {
 			setMarginInput(false)
 		}
 	}
-	const onPassCheckValidate = (e) => {
-		let value = e.target.value
-		dispatch(setPasswordCheck(value))
-		checkPassValid(value)
-	}
+
 	return (
 		<div
 			className={styles.wallet_input}
@@ -45,18 +33,15 @@ const InputPassCheck = ({ id, label, errorPar }) => {
 			}>
 			<ShowPass walletInput={styles.wallet_input} />
 			<input
-				onInput={(e) => onPassCheckValidate(e)}
+				onChange={(e) => setPassLog(e.target.value)}
+				className={styles.input}
 				onFocus={() => setMarginInput(true)}
 				onBlur={() => onBlur(passwordCheck)}
-				className={cn(styles.input, {
-					[styles.success]: passwordMatch == true,
-					[styles.error]: passwordMatch == false,
-				})}
 				type='password'
 				id={id}
-				name='name'
+				name='pass'
 				required={true}
-				value={passwordCheck}
+				value={passLog}
 			/>
 			<label className={styles.label} htmlFor={id}>
 				{label}
@@ -74,4 +59,4 @@ const InputPassCheck = ({ id, label, errorPar }) => {
 	)
 }
 
-export default InputPassCheck
+export default InputPassLog

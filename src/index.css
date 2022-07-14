@@ -60,6 +60,7 @@ html {
 	--error: #F04848;
 	--success: #23AC00;
 	--warning: #FAD200;
+	--blue: #4D69FF;
 }
 
 .btn {
@@ -165,5 +166,46 @@ section {
 }
 
 .wallet-header h2 {
-	margin-bottom: 0;
+	margin: 0;
+}
+.wallet-center {
+	flex-grow: 1;
+	flex-shrink: 1;
+}
+.wallet-center-df {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+}
+.nothing {
+	display: flex;
+	justify-content: center;
+	flex-direction: column;
+	align-items: center;
+}
+.link {
+	margin: 16px auto;
+	font-weight: 600;
+	font-size: 14px;
+	line-height: 20px;
+	text-decoration: none;
+	width: max-content;
+	display: block;
+}
+.transparent-link {
+	color: var(--disabled);
+}
+.transparent-link svg {
+	fill: var(--disabled);
+}
+.link svg {
+	margin-left: 10px;
+}
+
+.primary-link {
+	color: var(--primary);
+}
+.primary-link svg {
+	fill: var(--primary);
 }

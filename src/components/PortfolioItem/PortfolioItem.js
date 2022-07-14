@@ -1,7 +1,9 @@
 import React from 'react'
 import styles from './portfolio-item.module.css'
 import cn from 'classnames'
-import { useState } from 'react'
+import { setCurrentPage } from '../../actions/createActions'
+import { setPortfolioOpen } from '../../actions/wallet'
+import { useDispatch } from 'react-redux'
 const PortfolioItem = ({
 	cryptoName,
 	cryptoCount,
@@ -9,9 +11,13 @@ const PortfolioItem = ({
 	cryptoProfit,
 	cryptoImg,
 }) => {
-	const [profit, setProfit] = useState(true)
+	const dispatch = useDispatch()
+	const openPortfolio = () => {
+		dispatch(setPortfolioOpen(cryptoName))
+		dispatch(setCurrentPage('Transactions'))
+	}
 	return (
-		<li className={styles.item}>
+		<li className={styles.item} onClick={openPortfolio}>
 			<div className={styles.top}>
 				<div className={styles.info}>
 					<img className={styles.img} src={cryptoImg} alt='' />
@@ -23,9 +29,10 @@ const PortfolioItem = ({
 				<div className={styles.price}>{cryptoPrice}</div>
 				<div
 					className={cn(styles.profit, {
-						[styles.success]: profit,
+						[styles.success]: cryptoProfit > 0,
+						[styles.error]: cryptoProfit < 0,
 					})}>
-					{cryptoProfit}
+					{cryptoProfit}%
 				</div>
 			</div>
 		</li>

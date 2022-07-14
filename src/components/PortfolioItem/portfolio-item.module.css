@@ -5,6 +5,7 @@
 	padding: 16px 20px;
 	display: flex;
 	flex-direction: column;
+	cursor: pointer;
 }
 .img {
 	margin-right: 15px;
