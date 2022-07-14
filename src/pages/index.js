@@ -21,6 +21,7 @@ import ManageAccounts from './manage-account/manage-account'
 import WelcomeBack from './welcome-back/welcome-back'
 import TransactionsHistory from './transactions-history/transactions-history'
 import Sent from './sent/sent'
+import Receive from './receive/receive'
 
 import { useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
@@ -86,6 +87,8 @@ const Pages = () => {
 				return <TransactionsHistory />
 			case 'Sent':
 				return <Sent />
+			case 'Receive':
+				return <Receive />
 			default:
 				return <></>
 		}

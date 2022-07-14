@@ -22,6 +22,7 @@ const WalletBackup = () => {
 		let code = new Mnemonic()
 		code.toString()
 		var xpriv = code.toHDPrivateKey()
+		console.log(xpriv)
 		let arr = code.phrase.trim().split(' ')
 		dispatch(setPhrase(code.phrase))
 		dispatch(setPhraseArr(arr))

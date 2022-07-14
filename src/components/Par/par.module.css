@@ -16,3 +16,11 @@
 	line-height: 16px;
 	color: var(--error)
 }
+
+.black {
+	font-weight: 400;
+	font-size: 12px;
+	line-height: 18px;
+	color: #000;
+	margin-bottom: 30px;
+}
