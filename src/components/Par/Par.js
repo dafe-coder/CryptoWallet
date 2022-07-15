@@ -9,6 +9,7 @@ const Par = ({ type = 'md', children, color }) => {
 				[styles.sm]: type == 'sm',
 				[styles.md]: type == 'md',
 				[styles.black]: color == 'black',
+				[styles.dark_gray]: color == 'dark-gray',
 				[styles.error]: type == 'error',
 			})}>
 			{children}

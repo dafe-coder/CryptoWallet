@@ -1,0 +1,30 @@
+.body {
+	display: none;
+}
+.phrase {
+	background: var(--white);
+	border: 1px solid var(--success);
+	border-radius: 8px;
+	padding: 16px 20px;
+}
+.label {
+	font-weight: 400;
+	font-size: 12px;
+	line-height: 18px;
+	text-transform: capitalize;
+	color: var(--dark-gray);
+	margin-bottom: 5px;
+	display: flex;
+}
+
+.btn svg {
+	fill: var(--dark-gray);
+}
+
+.btn {
+	margin-top: 10px;
+	margin-left: auto;
+}
+.show {
+	display: block;
+}

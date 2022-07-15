@@ -14,29 +14,12 @@ const InputPassLog = ({ id, label, errorPar }) => {
 
 	const [passLog, setPassLog] = useState('')
 
-	const [marginInput, setMarginInput] = useState(null)
-	function onBlur(value) {
-		if (value.length > 0) {
-			setMarginInput(true)
-		} else {
-			setMarginInput(false)
-		}
-	}
-
 	return (
-		<div
-			className={styles.wallet_input}
-			style={
-				marginInput || passwordCheck.length > 1
-					? { marginTop: '40px' }
-					: { marginTop: 0 }
-			}>
+		<div className={styles.wallet_input}>
 			<ShowPass walletInput={styles.wallet_input} />
 			<input
 				onChange={(e) => setPassLog(e.target.value)}
 				className={'input'}
-				onFocus={() => setMarginInput(true)}
-				onBlur={() => onBlur(passwordCheck)}
 				type='password'
 				id={id}
 				name='pass'

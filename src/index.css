@@ -253,7 +253,17 @@ section {
     top: 16px;
     transition: all ease .4s;
     cursor: auto;
+	display: flex;
+	align-items: center
+}
+.label svg {
+	margin-right: 15px;
 }
 .pos-r {
 	position: relative;
+}
+
+ul li.active-time {
+	color: var(--primary);
+	font-weight: 600;
 }

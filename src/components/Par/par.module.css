@@ -24,3 +24,6 @@
 	color: #000;
 	margin-bottom: 30px;
 }
+.dark_gray {
+	color: var(--dark-gray);
+}

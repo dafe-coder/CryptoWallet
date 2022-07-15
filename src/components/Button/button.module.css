@@ -59,3 +59,20 @@
 .mt {
     margin-top: 10px;
 }
+.text_left {
+    justify-content: flex-start;
+}
+
+.border_gray {
+    background: var(--white);
+    border: 1px solid var(--gray);
+    border-radius: 8px;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 20px;
+    text-transform: capitalize;
+    color: var(--dark-gray);
+}
+.text_between {
+    justify-content: space-between;
+}

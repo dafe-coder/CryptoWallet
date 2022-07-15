@@ -22,6 +22,11 @@ import WelcomeBack from './welcome-back/welcome-back'
 import TransactionsHistory from './transactions-history/transactions-history'
 import Sent from './sent/sent'
 import Receive from './receive/receive'
+import Settings from './settings/settings'
+import SelectCurrency from './select-currency/select-currency'
+import SeedPhrase from './seed-phrase/seed-phrase'
+import About from './about/about'
+import SecurityPrivacy from './security-privacy/security-privacy'
 
 import { useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
@@ -89,6 +94,16 @@ const Pages = () => {
 				return <Sent />
 			case 'Receive':
 				return <Receive />
+			case 'Settings':
+				return <Settings />
+			case 'SelectCurrency':
+				return <SelectCurrency />
+			case 'SeedPhrase':
+				return <SeedPhrase />
+			case 'About':
+				return <About />
+			case 'SecurityPrivacy':
+				return <SecurityPrivacy />
 			default:
 				return <></>
 		}

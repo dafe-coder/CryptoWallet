@@ -1,0 +1,26 @@
+.list {
+	background: var(--white);
+	border: 1px solid var(--gray);
+	border-radius: 8px;
+	padding: 0 20px;
+	margin: 0;
+	list-style: none;
+	margin-top: 10px;
+}
+.list > *:not(:last-child) {
+	border-bottom: 1px solid var(--gray);
+}
+.list li {
+	padding: 15px 0;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	cursor: pointer;
+}
+.list li span {
+	font-weight: 400;
+	font-size: 14px;
+	line-height: 20px;
+	display: flex;
+	align-items: center
+}

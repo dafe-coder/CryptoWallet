@@ -4,9 +4,10 @@ import Par from '../Par/Par'
 import Title from './../Title/Title'
 import cn from 'classnames'
 
-const Alert = ({ children, danger = false, title, icon = false }) => {
+const Alert = ({ children, danger = false, title, icon = false, style }) => {
 	return (
 		<div
+			style={style}
 			className={cn(styles.alert, {
 				[styles.danger]: danger == true,
 			})}>
@@ -24,7 +25,9 @@ const Alert = ({ children, danger = false, title, icon = false }) => {
 					{title}
 				</Title>
 			) : (
-				<Title type='error-sm-alert'>{title}</Title>
+				<Title type='error-sm-alert' mb='0'>
+					{title}
+				</Title>
 			)}
 			<Par type='sm'>{children}</Par>
 		</div>

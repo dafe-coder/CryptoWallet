@@ -13,6 +13,7 @@ const Button = ({
 	style,
 	mb = false,
 	mt = '',
+	text,
 }) => {
 	function onClickFunc() {
 		if (onClick) {
@@ -34,10 +35,13 @@ const Button = ({
 				[styles.svg_right]: positionSvg == 'right',
 				[styles.svg_left]: positionSvg == 'left',
 				[styles.border_primary]: type == 'border-primary',
+				[styles.border_gray]: type == 'border-gray',
 				[styles.border_error]: type == 'border-error',
 				[styles.mb]: mb == true,
 				[styles.mt]: mt == true,
 				[styles.mt_0]: mt == '0',
+				[styles.text_left]: text == 'left',
+				[styles.text_between]: text == 'between',
 			})}>
 			{children}
 			{arrow ? (
