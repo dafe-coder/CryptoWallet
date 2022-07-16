@@ -80,3 +80,7 @@
 	line-height: 20px;
 	text-align: center;
 }
+
+.white {
+	color: var(--white)
+}

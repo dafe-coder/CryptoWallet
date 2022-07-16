@@ -8,9 +8,10 @@ import cn from 'classnames'
 
 const Form = () => {
 	const dispatch = useDispatch()
-	const { passwordValid, passwordMatch, nameValid } = useSelector(
-		(state) => state.create
-	)
+	const { passwordValid, passwordMatch, nameValid, name, password } =
+		useSelector((state) => state.create)
+
+	const { restoreAddress } = useSelector((state) => state.restore)
 	const [activeButton, setActiveButton] = useState(false)
 	useEffect(() => {
 		if (passwordValid && passwordMatch && nameValid) {
@@ -22,7 +23,13 @@ const Form = () => {
 
 	const submitForm = () => {
 		if (passwordValid && passwordMatch && nameValid) {
-			dispatch(setCurrentPage('CreateWalletSuccess'))
+			chrome.storage.sync.set(
+				{ userData: [name, password, restoreAddress] },
+				function () {
+					console.log('Value is set to ' + [name, password, restoreAddress])
+				}
+			)
+			dispatch(setCurrentPage('RestoreWalletLog'))
 		} else {
 		}
 	}

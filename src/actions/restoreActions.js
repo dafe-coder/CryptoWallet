@@ -23,3 +23,15 @@ export const setChooseCountRestore = (str) => {
 		payload: str,
 	}
 }
+export const setRestoreAddress = (str) => {
+	return {
+		type: 'SET_RESTORE_ADDRESS',
+		payload: str,
+	}
+}
+export const setRestoreDataLog = (data) => {
+	return {
+		type: 'SET_RESTORE_DATA_LOG',
+		payload: data,
+	}
+}

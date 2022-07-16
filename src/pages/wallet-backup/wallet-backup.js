@@ -7,7 +7,9 @@ import Title from '../../components/Title/Title'
 import Button from '../../components/Button/Button'
 import Par from '../../components/Par/Par'
 import GoBack from '../../components/GoBack/GoBack'
-
+import { bitcore } from 'bitcore-mnemonic/lib/mnemonic'
+import { PrivateKey } from 'bitcore-lib'
+import { HDPrivateKey, HDPublicKey, Address, Networks } from 'bitcore-lib'
 import {
 	setPhrase,
 	setPhraseArr,
@@ -19,10 +21,37 @@ const WalletBackup = () => {
 	const dispatch = useDispatch()
 
 	const createPhrase = () => {
-		let code = new Mnemonic()
-		code.toString()
+		// let code = new Mnemonic()
+		// code.toString()
+		let code = new Mnemonic(
+			'display stand cruise coil kidney vacant cream street flavor iron sound apple'
+		)
+
 		var xpriv = code.toHDPrivateKey()
+
+		// var value = Buffer.from(
+		// 	'display stand cruise coil kidney vacant cream street flavor iron sound apple'
+		// )
+		// var hash = bitcore.crypto.Hash.sha256(value)
+		// var bn = bitcore.crypto.BN.fromBuffer(hash)
+
+		// var address = new bitcore.PrivateKey(bn).toAddress()
+		var hdPrivateKey = new HDPrivateKey()
+		var hdPublicKey = hdPrivateKey.hdPublicKey
+		try {
+			new HDPublicKey(xpriv.xprivkey)
+		} catch (e) {
+			console.log("Can't generate a public key without a private key")
+		}
+
+		var address = new Address(hdPublicKey.publicKey, Networks.livenet)
+		var derivedAddress = new Address(
+			hdPublicKey.derive(100).publicKey,
+			Networks.testnet
+		) // see deprecation warning for derive
+
 		console.log(xpriv)
+		console.log(derivedAddress)
 		let arr = code.phrase.trim().split(' ')
 		dispatch(setPhrase(code.phrase))
 		dispatch(setPhraseArr(arr))

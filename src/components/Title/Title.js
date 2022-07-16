@@ -14,6 +14,7 @@ const Title = ({ type = 'md', color = 'primary', children, mb = '30', mt }) => {
 				[styles.error_sm]: type == 'error-sm',
 				[styles.error_sm_alert]: type == 'error-sm-alert',
 				[styles.dark]: color == 'dark',
+				[styles.white]: color == 'white',
 				[styles.primary]: color == 'primary',
 				[styles.mt]: mt == true,
 				[styles.m_0]: mb == '0',

@@ -8,6 +8,7 @@ import {
 	setRestorePhrase,
 	setRestorePhraseValid,
 	setRestorePhraseArr,
+	setRestoreAddress,
 } from '../../actions/restoreActions'
 
 const Textarea = ({ id, label, errorPar }) => {
@@ -29,6 +30,7 @@ const Textarea = ({ id, label, errorPar }) => {
 		let phraseArr = phrase.trim().split(' ')
 		dispatch(setRestorePhrase(phrase))
 		dispatch(setRestorePhraseArr(phraseArr))
+		dispatch(setRestoreAddress(phraseArr))
 		if (phraseArr.length == +chooseCountWordRestore) {
 			dispatch(setRestorePhraseValid(true))
 		} else if ('own' == chooseCountWordRestore && phraseArr.length > 1) {

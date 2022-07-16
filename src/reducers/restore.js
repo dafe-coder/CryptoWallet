@@ -1,8 +1,10 @@
 const initialState = {
 	restorePhrase: '',
+	restoreAddress: '',
 	restorePhraseArr: [],
 	restorePhraseValid: null,
-	chooseCountWordRestore: '',
+	chooseCountWordRestore: null,
+	restoreDataLog: null,
 }
 
 const restore = (state = initialState, action) => {
@@ -26,6 +28,16 @@ const restore = (state = initialState, action) => {
 			return {
 				...state,
 				chooseCountWordRestore: action.payload,
+			}
+		case 'SET_RESTORE_ADDRESS':
+			return {
+				...state,
+				restoreAddress: action.payload,
+			}
+		case 'SET_RESTORE_DATA_LOG':
+			return {
+				...state,
+				restoreDataLog: action.payload,
 			}
 		default:
 			return state

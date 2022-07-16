@@ -5,35 +5,49 @@ import Button from '../../components/Button/Button'
 import styles from './welcome-back.module.css'
 import Modal from '../../components/modal/Modal'
 import Par from './../../components/Par/Par'
-
+import bgImage from './Frame.png'
+import { setCurrentPage } from '../../actions/createActions'
+import { setPassword } from '../../actions/createActions'
+import { useDispatch } from 'react-redux'
+import { useSelector } from 'react-redux'
 const WelcomeBack = () => {
+	const { password } = useSelector((state) => state.create)
+	const dispatch = useDispatch()
+	const logIn = () => {
+		chrome.storage.sync.get(['userData'], function (result) {
+			console.log(result.userData[1])
+			if (password == result.userData[1]) {
+				dispatch(setCurrentPage('Wallet'))
+			} else {
+				dispatch(setPassword(''))
+			}
+		})
+	}
 	return (
-		<section className='bg-white'>
-			<div
-				className='wallet-body'
-				style={{
-					height: '100%',
-					display: 'flex',
-					flexDirection: 'column',
-					alignItems: 'center',
-					justifyContent: 'center',
-					position: 'relative',
-				}}>
-				<Title mt>Welcome back</Title>
-				<form style={{ width: '100%' }}>
-					<Input type='pass-log' id='passwordLog' label='Password' />
-					<Button type='primary' mt>
-						Unlock
-					</Button>
-				</form>
-				<div className={styles.reg}>
-					<p>Unable to Log in?</p>
-					<a href='!#'>Import</a>
-					or
-					<a href='!#'>create a new wallet</a>.
+		<section>
+			<div className='wallet_body'>
+				<div className={styles.top}>
+					<img src={bgImage} alt='wallet logo' />
+				</div>
+				<div className={styles.bottom}>
+					<Title color='white' mt>
+						Welcome back
+					</Title>
+					<form style={{ width: '100%' }}>
+						<Input type='pass-log' id='passwordLog' label='Password' />
+						<Button type='white' mt onClick={logIn}>
+							Unlock
+						</Button>
+					</form>
+					<div className={styles.reg}>
+						<p>Unable to Log in?</p>
+						<a href='!#'>Import</a>
+						or
+						<a href='!#'>create a new wallet</a>.
+					</div>
 				</div>
 			</div>
-			<Modal open={true} white padding='0'>
+			<Modal open={false} white padding='0'>
 				<Title type='error' mb>
 					Risk Alert
 				</Title>

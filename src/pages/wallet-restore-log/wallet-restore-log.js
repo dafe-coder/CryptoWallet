@@ -1,12 +1,15 @@
 import React from 'react'
 import Button from '../../components/Button/Button'
 import Title from '../../components/Title/Title'
-import AccountCardReg from '../../components/AccountCardReg/AccountCardReg'
 import GoBack from '../../components/GoBack/GoBack'
+import AccountCardReg from './../../components/AccountCardReg/AccountCardReg'
+import { setCurrentPage } from '../../actions/createActions'
+import { useDispatch } from 'react-redux'
 
 const RestoreWalletLog = () => {
+	const dispatch = useDispatch()
 	const goReg = () => {
-		alert('Success')
+		dispatch(setCurrentPage('Wallet'))
 	}
 	return (
 		<section className='bg-white'>
