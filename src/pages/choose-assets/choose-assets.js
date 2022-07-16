@@ -24,16 +24,16 @@ const ChooseAssets = () => {
 			.then((response) => setDataTokens(response))
 			.catch((err) => console.error(err))
 	}
-	useEffect(() => {
-		getAllTokens()
-	}, [])
+	// useEffect(() => {
+	// 	getAllTokens()
+	// }, [])
 	return (
 		<section className='bg-white'>
 			<div className='wallet-body'>
 				<div className={styles.header}>
 					<Buttons
-						type='back'
-						onClick={() => dispatch(setCurrentPage('Wallet'))}></Buttons>
+						onClick={() => dispatch(setCurrentPage('Wallet'))}
+						type='back'></Buttons>
 					<Title>Assets (3/273)</Title>
 					<Buttons type='settings'></Buttons>
 				</div>

@@ -27,6 +27,7 @@ import SelectCurrency from './select-currency/select-currency'
 import SeedPhrase from './seed-phrase/seed-phrase'
 import About from './about/about'
 import SecurityPrivacy from './security-privacy/security-privacy'
+import SelectLanguage from './select-language/select-language'
 
 import { useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
@@ -98,6 +99,8 @@ const Pages = () => {
 				return <Settings />
 			case 'SelectCurrency':
 				return <SelectCurrency />
+			case 'SelectLanguage':
+				return <SelectLanguage />
 			case 'SeedPhrase':
 				return <SeedPhrase />
 			case 'About':

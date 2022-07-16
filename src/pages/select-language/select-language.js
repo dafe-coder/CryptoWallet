@@ -1,12 +1,12 @@
 import React from 'react'
 import Title from '../../components/Title/Title'
 import Buttons from '../../components/Buttons/Buttons'
-import styles from './select-currency.module.css'
-import Svg from './../../svgs/Svg'
+import styles from './select-language.module.css'
+import Svg from '../../svgs/Svg'
 import { setCurrentPage } from '../../actions/createActions'
 import { useDispatch } from 'react-redux'
 
-const SelectCurrency = () => {
+const SelectLanguage = () => {
 	const dispatch = useDispatch()
 	return (
 		<section className='bg-white'>
@@ -17,7 +17,7 @@ const SelectCurrency = () => {
 							onClick={() => dispatch(setCurrentPage('Settings'))}
 							type='back'
 						/>
-						<Title>Select Currency</Title>
+						<Title>Select Language</Title>
 						<div></div>
 					</div>
 				</div>
@@ -27,29 +27,35 @@ const SelectCurrency = () => {
 							<input
 								type='search'
 								className='input'
-								id='search-currency'
+								id='search-language'
 								required={true}
 							/>
-							<label htmlFor='search-currency' className='label'>
+							<label htmlFor='search-language' className='label'>
 								<Svg type='search' />
-								Search for currency
+								Search for language
 							</label>
 						</div>
 						<ul className={styles.list}>
 							<li>
-								<span>Default (USD)</span>
+								<span>Default (English)</span>
 							</li>
 							<li>
-								<span>CNY</span>
+								<span>English</span>
 							</li>
 							<li>
-								<span>EUR</span>
+								<span>Español</span>
 							</li>
 							<li>
-								<span>GBP</span>
+								<span>Bahasa Indonesia</span>
 							</li>
 							<li>
-								<span>USD</span>
+								<span>Português</span>
+							</li>
+							<li>
+								<span>Русский</span>
+							</li>
+							<li>
+								<span>Türkce</span>
 							</li>
 						</ul>
 					</div>
@@ -58,4 +64,4 @@ const SelectCurrency = () => {
 		</section>
 	)
 }
-export default SelectCurrency
+export default SelectLanguage

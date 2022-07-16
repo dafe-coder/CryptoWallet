@@ -88,14 +88,28 @@ const Wallet = () => {
 		<section className={'bg-white'}>
 			<div className='wallet-body'>
 				<div className='wallet-header' style={{ marginBottom: '20px' }}>
-					<Buttons type='notification'></Buttons>
+					<Buttons
+						type='notification'
+						onClick={() =>
+							dispatch(setCurrentPage('TransactionsHistory'))
+						}></Buttons>
 					<Title>Your Account</Title>
-					<Buttons type='account'></Buttons>
+					<Buttons
+						onClick={() => dispatch(setCurrentPage('Settings'))}
+						type='account'></Buttons>
 				</div>
 				<div className='wallet-top' style={{ position: 'relative' }}>
-					<TransferBtn type='send'>Transfer</TransferBtn>
+					<TransferBtn
+						onClick={() => dispatch(setCurrentPage('Sent'))}
+						type='send'>
+						Transfer
+					</TransferBtn>
 					<ApexChart />
-					<TransferBtn type='receive'>Receive</TransferBtn>
+					<TransferBtn
+						onClick={() => dispatch(setCurrentPage('Receive'))}
+						type='receive'>
+						Receive
+					</TransferBtn>
 				</div>
 				<div className='wallet-bottom'>
 					<ul className={styles.navigation}>

@@ -7,13 +7,18 @@ import Buttons from '../../components/Buttons/Buttons'
 import Par from '../../components/Par/Par'
 import Svg from './../../svgs/Svg'
 import qrIcon from './iconfinder_qr_code_9040588 1.png'
+import { setCurrentPage } from '../../actions/createActions'
+import { useDispatch } from 'react-redux'
 const Receive = () => {
+	const dispatch = useDispatch()
 	return (
 		<section className='bg-white'>
 			<div className='wallet-body'>
 				<div className='wallet-top'>
 					<div className='wallet-header'>
-						<Buttons type='back'></Buttons>
+						<Buttons
+							onClick={() => dispatch(setCurrentPage('Wallet'))}
+							type='back'></Buttons>
 						<Title>Payment Information</Title>
 						<div></div>
 					</div>

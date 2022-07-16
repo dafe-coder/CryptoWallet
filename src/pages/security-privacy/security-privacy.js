@@ -2,11 +2,12 @@ import React from 'react'
 import Title from '../../components/Title/Title'
 import Buttons from '../../components/Buttons/Buttons'
 import Par from '../../components/Par/Par'
-import Svg from '../../svgs/Svg'
 import AllowData from '../../components/AllowData/AllowData'
 import Dropdown from '../../components/Dropdown/Dropdown'
-
+import { setCurrentPage } from '../../actions/createActions'
+import { useDispatch } from 'react-redux'
 const SecurityPrivacy = () => {
+	const dispatch = useDispatch()
 	const dataDropdown = [
 		'5 minutes',
 		'15 minutes',
@@ -20,7 +21,10 @@ const SecurityPrivacy = () => {
 			<div className='wallet-body'>
 				<div className='wallet-top'>
 					<div className='wallet-header'>
-						<Buttons type='back' />
+						<Buttons
+							onClick={() => dispatch(setCurrentPage('Settings'))}
+							type='back'
+						/>
 						<Title>Security and Privacy</Title>
 						<div></div>
 					</div>

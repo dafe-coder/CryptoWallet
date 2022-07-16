@@ -9,13 +9,20 @@ import styles from './sent.module.css'
 import cn from 'classnames'
 import Par from './../../components/Par/Par'
 import PaymentDetails from '../../components/PaymentDetails/PaymentDetails'
+import { setCurrentPage } from '../../actions/createActions'
+import { useDispatch } from 'react-redux'
+
 const Sent = () => {
+	const dispatch = useDispatch()
 	return (
 		<section className='bg-white'>
 			<div className='wallet-body'>
 				<div className='wallet-top'>
 					<div className='wallet-header'>
-						<Buttons type='back' />
+						<Buttons
+							onClick={() => dispatch(setCurrentPage('Wallet'))}
+							type='back'
+						/>
 						<Title>Sent</Title>
 						<div></div>
 					</div>

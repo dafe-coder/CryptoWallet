@@ -2,10 +2,12 @@ import React from 'react'
 import styles from './go-back.module.css'
 import { setCurrentPage } from '../../actions/createActions'
 import { useDispatch } from 'react-redux'
-const GoBack = ({ goTo }) => {
+import { useSelector } from 'react-redux/es/exports'
+const GoBack = () => {
+	const { currentPage } = useSelector((state) => state.create)
 	const dispatch = useDispatch()
 	function goToBack() {
-		dispatch(setCurrentPage(goTo))
+		dispatch(setCurrentPage([currentPage[1]]))
 	}
 	return (
 		<button onClick={goToBack} className={styles.back}>

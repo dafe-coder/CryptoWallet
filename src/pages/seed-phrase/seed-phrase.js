@@ -6,13 +6,20 @@ import Par from '../../components/Par/Par'
 import Alert from './../../components/Alert/Alert'
 import Input from './../../components/Input/Input'
 import SeedPhraseBox from '../../components/SeedPhrase/SeedPhrase'
+import { setCurrentPage } from '../../actions/createActions'
+import { useDispatch } from 'react-redux'
+
 const SeedPhrase = () => {
+	const dispatch = useDispatch()
 	return (
 		<section className='bg-white'>
 			<div className='wallet_body'>
 				<div className='wallet-top'>
 					<div className='wallet-header'>
-						<Buttons type='back' />
+						<Buttons
+							onClick={() => dispatch(setCurrentPage('Settings'))}
+							type='back'
+						/>
 						<Title>Seed Phrase</Title>
 						<div></div>
 					</div>

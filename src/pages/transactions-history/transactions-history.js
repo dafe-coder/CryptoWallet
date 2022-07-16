@@ -3,8 +3,11 @@ import Buttons from '../../components/Buttons/Buttons'
 import Title from '../../components/Title/Title'
 import Svg from '../../svgs/Svg'
 import TransactionList from './../../components/TransactionList/TransactionList'
+import { setCurrentPage } from '../../actions/createActions'
+import { useDispatch } from 'react-redux'
 
 const TransactionsHistory = () => {
+	const dispatch = useDispatch()
 	const data = ['send', 'receive', 'send', 'swap']
 
 	return (
@@ -14,7 +17,9 @@ const TransactionsHistory = () => {
 				style={{ display: 'flex', flexDirection: 'column', height: '100%' }}>
 				<div className='wallet-top'>
 					<div className='wallet-header'>
-						<Buttons type='back'></Buttons>
+						<Buttons
+							onClick={() => dispatch(setCurrentPage('Wallet'))}
+							type='back'></Buttons>
 						<Title>Transactions History</Title>
 						<Buttons type='settings'></Buttons>
 					</div>

@@ -2,11 +2,11 @@ import React from 'react'
 import cn from 'classnames'
 import styles from './transfer-btn.module.css'
 
-const TransferBtn = ({ type, children }) => {
+const TransferBtn = ({ type, children, onClick }) => {
 	switch (type) {
 		case 'send':
 			return (
-				<button className={cn(styles.btn, styles.send)}>
+				<button onClick={onClick} className={cn(styles.btn, styles.send)}>
 					<svg
 						width='8'
 						height='9'
@@ -20,7 +20,7 @@ const TransferBtn = ({ type, children }) => {
 			)
 		case 'receive':
 			return (
-				<button className={cn(styles.btn, styles.receive)}>
+				<button onClick={onClick} className={cn(styles.btn, styles.receive)}>
 					<svg
 						width='8'
 						height='9'
