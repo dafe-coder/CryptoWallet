@@ -2,8 +2,16 @@ import React, { useState } from 'react'
 import cn from 'classnames'
 import styles from './dropdown.module.css'
 import Svg from '../../svgs/Svg'
-const Dropdown = ({ dataDropdown, active }) => {
+import { logTimer } from './../../pages/Func.wallet/logTimer'
+import { setChooseTimeOut } from '../../actions/wallet'
+import { useDispatch } from 'react-redux'
+const Dropdown = ({ dataDropdown, active, type }) => {
+	let dispatch = useDispatch()
 	const [open, setOpen] = useState(false)
+	const setLoginTimeOut = (value) => {
+		chrome.storage.sync.remove(['logTimeOut'])
+		chrome.storage.sync.set({ logTimeOut: value })
+	}
 	const onChoose = (e) => {
 		const target = e.target
 		target
@@ -17,6 +25,11 @@ const Dropdown = ({ dataDropdown, active }) => {
 			.closest('.' + styles.dropdown)
 			.querySelector('button span').innerText = target.innerText
 		setOpen(false)
+		if (type == 'log-time-out') {
+			setLoginTimeOut(target.innerText)
+			logTimer(target.innerText)
+			dispatch(setChooseTimeOut(target.innerText))
+		}
 	}
 	return (
 		<div className={styles.dropdown}>

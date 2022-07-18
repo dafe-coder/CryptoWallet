@@ -8,16 +8,21 @@ import Par from './../../components/Par/Par'
 import bgImage from './Frame.png'
 import { setCurrentPage } from '../../actions/createActions'
 import { setPassword } from '../../actions/createActions'
-import { useDispatch } from 'react-redux'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
+import { logTimer } from '../Func.wallet/logTimer'
+
 const WelcomeBack = () => {
 	const { password } = useSelector((state) => state.create)
 	const dispatch = useDispatch()
+
 	const logIn = () => {
 		chrome.storage.sync.get(['userData'], function (result) {
 			console.log(result.userData[1])
 			if (password == result.userData[1]) {
 				dispatch(setCurrentPage('Wallet'))
+				chrome.storage.sync.get(['logTimeOut'], function (result) {
+					logTimer(result.logTimeOut)
+				})
 			} else {
 				dispatch(setPassword(''))
 			}

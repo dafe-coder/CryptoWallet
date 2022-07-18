@@ -5,6 +5,7 @@ const initialState = {
 	portfolioSort: 'name',
 	portfolioOpen: 'ETH',
 	portfolioData: [],
+	chooseTimeOut: null,
 }
 
 const restore = (state = initialState, action) => {
@@ -38,6 +39,11 @@ const restore = (state = initialState, action) => {
 			return {
 				...state,
 				portfolioData: action.payload,
+			}
+		case 'SET_CHOOSE_TIMEOUT':
+			return {
+				...state,
+				chooseTimeOut: action.payload,
 			}
 		default:
 			return state

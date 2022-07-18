@@ -28,3 +28,9 @@ export const setPortfolioData = (data) => {
 		payload: data,
 	}
 }
+export const setChooseTimeOut = (time) => {
+	return {
+		type: 'SET_CHOOSE_TIMEOUT',
+		payload: time,
+	}
+}

@@ -5,9 +5,10 @@ import Par from '../../components/Par/Par'
 import AllowData from '../../components/AllowData/AllowData'
 import Dropdown from '../../components/Dropdown/Dropdown'
 import { setCurrentPage } from '../../actions/createActions'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 const SecurityPrivacy = () => {
 	const dispatch = useDispatch()
+	const { chooseTimeOut } = useSelector((state) => state.wallet)
 	const dataDropdown = [
 		'5 minutes',
 		'15 minutes',
@@ -34,7 +35,11 @@ const SecurityPrivacy = () => {
 					<Par>
 						Set the idle time in minutes before Polygon Wallet is locked.
 					</Par>
-					<Dropdown dataDropdown={dataDropdown} active='30 minutes' />
+					<Dropdown
+						type='log-time-out'
+						dataDropdown={dataDropdown}
+						active={chooseTimeOut}
+					/>
 				</div>
 				<div className='wallet-bottom'>
 					<AllowData />

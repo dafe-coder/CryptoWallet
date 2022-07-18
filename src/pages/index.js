@@ -28,11 +28,10 @@ import SeedPhrase from './seed-phrase/seed-phrase'
 import About from './about/about'
 import SecurityPrivacy from './security-privacy/security-privacy'
 import SelectLanguage from './select-language/select-language'
-
+import { logTimer } from './Func.wallet/logTimer'
 import { useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-
-import { setDataWallet } from '../actions/wallet'
+import { setChooseTimeOut } from '../actions/wallet'
 import {
 	setCurrentPage,
 	setShowErrorVerification,
@@ -45,11 +44,38 @@ const Pages = () => {
 		useSelector((state) => state.create)
 
 	useEffect(() => {
+		let timerId
+
+		chrome.storage.session.get(['timer'], function (result) {
+			console.log(result.timer <= Date.parse(new Date()))
+			console.log(result.timer, Date.parse(new Date()))
+			if (result.timer && result.timer <= Date.parse(new Date())) {
+				dispatch(setCurrentPage('WelcomeBack'))
+			} else {
+				dispatch(setCurrentPage(currentPage))
+			}
+		})
+		return () => {
+			clearInterval(timerId)
+		}
+	}, [])
+
+	useEffect(() => {
+		chrome.storage.sync.get(['logTimeOut'], function (result) {
+			if (result.logTimeOut) {
+				dispatch(setChooseTimeOut(result.logTimeOut))
+			} else {
+				chrome.storage.sync.set({ logTimeOut: '30 minutes' })
+				dispatch(setChooseTimeOut('30 minutes'))
+			}
+		})
+
 		chrome.storage.session.get(['currentPage'], function (result) {
 			if (result.currentPage && result.currentPage.length > 3) {
 				dispatch(setCurrentPage(result.currentPage))
 			}
 		})
+		// chrome.storage.sync.clear()
 	}, [])
 	const renderPages = () => {
 		switch (currentPage) {
