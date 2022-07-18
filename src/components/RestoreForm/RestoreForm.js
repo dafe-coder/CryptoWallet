@@ -5,14 +5,19 @@ import Textarea from './../Textarea/Textarea'
 import { setCurrentPage } from '../../actions/createActions'
 import { useDispatch, useSelector } from 'react-redux'
 import cn from 'classnames'
-
+import generateAddressesFromSeed from '../../pages/Func.wallet/generateAddress'
+import Mnemonic from 'bitcore-mnemonic/lib/mnemonic'
+import { setRestoreAddress } from './../../actions/restoreActions'
 const Form = () => {
 	const dispatch = useDispatch()
 	const { passwordValid, passwordMatch, nameValid, name, password } =
 		useSelector((state) => state.create)
 
-	const { restoreAddress } = useSelector((state) => state.restore)
+	const { restorePhrase, restorePhraseValid, chooseCountWordRestore } =
+		useSelector((state) => state.restore)
+
 	const [activeButton, setActiveButton] = useState(false)
+
 	useEffect(() => {
 		if (passwordValid && passwordMatch && nameValid) {
 			setActiveButton(true)
@@ -21,6 +26,16 @@ const Form = () => {
 		}
 	}, [passwordValid, passwordMatch, nameValid])
 
+	const getAddress = () => {
+		if (+chooseCountWordRestore == restorePhrase.length) {
+			let code = new Mnemonic(restorePhrase)
+			const count = chooseCountWordRestore
+			const result = generateAddressesFromSeed(code.phrase, count)
+			dispatch(setRestoreAddress(result))
+		} else {
+			alert('Используешь приватный код')
+		}
+	}
 	const submitForm = () => {
 		if (passwordValid && passwordMatch && nameValid) {
 			chrome.storage.sync.set(
@@ -29,6 +44,7 @@ const Form = () => {
 					console.log('Value is set to ' + [name, password, restoreAddress])
 				}
 			)
+			getAddress()
 			dispatch(setCurrentPage('RestoreWalletLog'))
 		} else {
 		}

@@ -8,14 +8,15 @@ import {
 	setRestorePhrase,
 	setRestorePhraseValid,
 	setRestorePhraseArr,
-	setRestoreAddress,
 } from '../../actions/restoreActions'
 
 const Textarea = ({ id, label, errorPar }) => {
 	const [marginInput, setMarginInput] = useState(null)
+	const [phraseBoolean, setPhraseBoolean] = useState(null)
 
-	const { restorePhraseValid, chooseCountWordRestore, restorePhrase } =
-		useSelector((state) => state.restore)
+	const { chooseCountWordRestore, restorePhrase } = useSelector(
+		(state) => state.restore
+	)
 	const dispatch = useDispatch()
 
 	function onBlur(value) {
@@ -27,24 +28,26 @@ const Textarea = ({ id, label, errorPar }) => {
 	}
 	const onNameValidate = (e) => {
 		let phrase = e.target.value
-		let phraseArr = phrase.trim().split(' ')
 		dispatch(setRestorePhrase(phrase))
+		let phraseArr = phrase.trim().split(' ')
 		dispatch(setRestorePhraseArr(phraseArr))
-		dispatch(setRestoreAddress(phraseArr))
+
 		if (phraseArr.length == +chooseCountWordRestore) {
 			dispatch(setRestorePhraseValid(true))
-		} else if ('own' == chooseCountWordRestore && phraseArr.length > 1) {
+		} else if ('own' == chooseCountWordRestore && restorePhrase.length >= 1) {
 			dispatch(setRestorePhraseValid(true))
-			console.log(restorePhraseValid)
+			setPhraseBoolean(true)
+			console.log(phraseBoolean)
 		} else {
 			dispatch(setRestorePhraseValid(false))
+			setPhraseBoolean(false)
 		}
 	}
 	return (
 		<div
 			className={styles.wallet_input}
 			style={
-				marginInput || restorePhrase.length > 1
+				marginInput || restorePhrase.length >= 1
 					? { marginTop: '40px' }
 					: { marginTop: 0 }
 			}>
@@ -53,8 +56,8 @@ const Textarea = ({ id, label, errorPar }) => {
 				onFocus={() => setMarginInput(true)}
 				onBlur={() => onBlur(restorePhrase)}
 				className={cn(styles.textarea, {
-					[styles.success]: restorePhraseValid == true,
-					[styles.error]: restorePhraseValid == false,
+					[styles.success]: phraseBoolean == true,
+					[styles.error]: phraseBoolean == false,
 				})}
 				type='text'
 				id={id}
@@ -65,7 +68,7 @@ const Textarea = ({ id, label, errorPar }) => {
 				{label}
 			</label>
 			{errorPar ? (
-				restorePhraseValid == false ? (
+				phraseBoolean == false ? (
 					<Par type='error'>{errorPar}</Par>
 				) : (
 					<></>

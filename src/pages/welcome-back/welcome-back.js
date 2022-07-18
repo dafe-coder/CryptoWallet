@@ -12,14 +12,14 @@ import { useDispatch, useSelector } from 'react-redux'
 import { logTimer } from '../Func.wallet/logTimer'
 
 const WelcomeBack = () => {
-	const { password } = useSelector((state) => state.create)
+	const { password, currentPage } = useSelector((state) => state.create)
 	const dispatch = useDispatch()
 
 	const logIn = () => {
 		chrome.storage.sync.get(['userData'], function (result) {
 			console.log(result.userData[1])
 			if (password == result.userData[1]) {
-				dispatch(setCurrentPage('Wallet'))
+				dispatch(setCurrentPage(currentPage))
 				chrome.storage.sync.get(['logTimeOut'], function (result) {
 					logTimer(result.logTimeOut)
 				})
