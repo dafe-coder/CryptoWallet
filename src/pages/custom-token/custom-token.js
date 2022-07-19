@@ -4,12 +4,24 @@ import Title from '../../components/Title/Title'
 import ChooseNetwork from '../../components/ChooseNetwork/ChooseNetwork'
 import Button from '../../components/Button/Button'
 import Link from '../../components/Link/Link'
+import Buttons from '../../components/Buttons/Buttons'
+import { setCurrentPage } from '../../actions/createActions'
+import { useDispatch } from 'react-redux'
 const CustomToken = () => {
+	const dispatch = useDispatch()
 	return (
 		<section className='bg-white'>
 			<div className='wallet_body'>
 				<div className='wallet-top'>
-					<Title>Custom Token</Title>
+					<div className='wallet-header'>
+						<Buttons
+							type='back'
+							onClick={() =>
+								dispatch(setCurrentPage('ChooseAssets'))
+							}></Buttons>
+						<Title>Custom Token</Title>
+						<div></div>
+					</div>
 					<ChooseNetwork />
 				</div>
 				<div className='wallet-bottom'>

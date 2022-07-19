@@ -27,7 +27,7 @@ const Accounts = () => {
 						<Svg type='plus' />
 						Add account
 					</Button>
-					<Button type='border-primary' positionSvg='left'>
+					<Button mt='0' type='border-primary' positionSvg='left'>
 						<Svg type='upload' />
 						Import account
 					</Button>

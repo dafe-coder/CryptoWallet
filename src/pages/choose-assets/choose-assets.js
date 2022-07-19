@@ -6,27 +6,25 @@ import styles from './choose-assets.module.css'
 import Buttons from '../../components/Buttons/Buttons'
 import { setCurrentPage } from '../../actions/createActions'
 import { useDispatch } from 'react-redux'
+import useWalletService from '../../services/WalletService'
+import CoinGecko from 'coingecko-api'
+
 const ChooseAssets = () => {
 	const dispatch = useDispatch()
 	const [dataTokens, setDataTokens] = useState([])
+	const [value, setValue] = useState([])
+	const { loading, error, getWalletToken } = useWalletService()
+	const CoinGeckoClient = new CoinGecko()
 
-	function getAllTokens() {
-		const options = {
-			method: 'GET',
-			headers: {
-				'X-RapidAPI-Key': '858e123930msh2cf167f2a15665ep164d8ajsnb1e687303080',
-				'X-RapidAPI-Host': 'mineable-coins.p.rapidapi.com',
-			},
-		}
-
-		fetch('https://mineable-coins.p.rapidapi.com/coins', options)
-			.then((response) => response.json())
-			.then((response) => setDataTokens(response))
-			.catch((err) => console.error(err))
+	var func = async () => {
+		let data = await CoinGeckoClient.coins.all()
+		setDataTokens(data)
 	}
-	// useEffect(() => {
-	// 	getAllTokens()
-	// }, [])
+
+	useEffect(() => {
+		func()
+	}, [])
+
 	return (
 		<section className='bg-white'>
 			<div className='wallet-body'>
@@ -34,14 +32,18 @@ const ChooseAssets = () => {
 					<Buttons
 						onClick={() => dispatch(setCurrentPage('Wallet'))}
 						type='back'></Buttons>
-					<Title>Assets (3/273)</Title>
-					<Buttons type='settings'></Buttons>
+					<Title mt>
+						Assets (3/{dataTokens.length ? dataTokens.data.length : 0})
+					</Title>
+					<Buttons
+						type='settings'
+						onClick={() => dispatch(setCurrentPage('CustomToken'))}></Buttons>
 				</div>
 				<div className='wallet-top'>
-					<AssetsSearch />
+					<AssetsSearch setValue={setValue} value={value} />
 				</div>
 				<div className='wallet-bottom'>
-					<AssetsList dataTokens={dataTokens} value='zpool Allium' />
+					<AssetsList dataTokens={dataTokens} value={value} />
 				</div>
 			</div>
 		</section>

@@ -2,7 +2,7 @@ const initialState = {
 	phrase: '',
 	phraseArr: [],
 	phraseArrScattered: [],
-	currentPage: 'WalletRestore',
+	currentPage: 'ChooseAssets',
 	name: '',
 	password: '',
 	passwordCheck: '',

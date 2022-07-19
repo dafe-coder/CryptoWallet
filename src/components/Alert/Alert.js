@@ -12,7 +12,7 @@ const Alert = ({ children, danger = false, title, icon = false, style }) => {
 				[styles.danger]: danger == true,
 			})}>
 			{icon ? (
-				<Title type='error-sm-alert'>
+				<Title type='error-sm-alert' mb='0'>
 					<svg
 						className={styles.icon}
 						width='16'

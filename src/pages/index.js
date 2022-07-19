@@ -28,7 +28,6 @@ import SeedPhrase from './seed-phrase/seed-phrase'
 import About from './about/about'
 import SecurityPrivacy from './security-privacy/security-privacy'
 import SelectLanguage from './select-language/select-language'
-import { logTimer } from './Func.wallet/logTimer'
 import { useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { setChooseTimeOut } from '../actions/wallet'
@@ -47,8 +46,8 @@ const Pages = () => {
 		let timerId
 
 		chrome.storage.session.get(['timer'], function (result) {
-			console.log(result.timer <= Date.parse(new Date()))
-			console.log(result.timer, Date.parse(new Date()))
+			// console.log(result.timer <= Date.parse(new Date()))
+			// console.log(result.timer, Date.parse(new Date()))
 			if (result.timer && result.timer <= Date.parse(new Date())) {
 				dispatch(setCurrentPage('WelcomeBack'))
 			} else {
@@ -74,6 +73,9 @@ const Pages = () => {
 			if (result.currentPage && result.currentPage.length > 3) {
 				dispatch(setCurrentPage(result.currentPage))
 			}
+		})
+		chrome.storage.sync.get(['userData'], function (result) {
+			// console.log(result.userData)
 		})
 		// chrome.storage.sync.clear()
 	}, [])

@@ -13,8 +13,12 @@ const Form = () => {
 	const { passwordValid, passwordMatch, nameValid, name, password } =
 		useSelector((state) => state.create)
 
-	const { restorePhrase, restorePhraseValid, chooseCountWordRestore } =
-		useSelector((state) => state.restore)
+	const {
+		restorePhrase,
+		restorePhraseArr,
+		restoreAddress,
+		chooseCountWordRestore,
+	} = useSelector((state) => state.restore)
 
 	const [activeButton, setActiveButton] = useState(false)
 
@@ -27,10 +31,11 @@ const Form = () => {
 	}, [passwordValid, passwordMatch, nameValid])
 
 	const getAddress = () => {
-		if (+chooseCountWordRestore == restorePhrase.length) {
+		if (+chooseCountWordRestore == restorePhraseArr.length) {
 			let code = new Mnemonic(restorePhrase)
 			const count = chooseCountWordRestore
 			const result = generateAddressesFromSeed(code.phrase, count)
+			console.log(result)
 			dispatch(setRestoreAddress(result))
 		} else {
 			alert('Используешь приватный код')
@@ -38,13 +43,24 @@ const Form = () => {
 	}
 	const submitForm = () => {
 		if (passwordValid && passwordMatch && nameValid) {
-			chrome.storage.sync.set(
-				{ userData: [name, password, restoreAddress] },
-				function () {
-					console.log('Value is set to ' + [name, password, restoreAddress])
-				}
-			)
 			getAddress()
+
+			chrome.storage.sync.get(['userData'], function (result) {
+				if (result.userData.length >= 1) {
+					chrome.storage.sync.set({
+						userData: [
+							...result.userData,
+							{ name, password, restoreAddress: restoreAddress[0].address },
+						],
+					})
+				} else {
+					chrome.storage.sync.set({
+						userData: [
+							{ name, password, restoreAddress: restoreAddress[0].address },
+						],
+					})
+				}
+			})
 			dispatch(setCurrentPage('RestoreWalletLog'))
 		} else {
 		}

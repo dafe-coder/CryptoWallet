@@ -1,6 +1,6 @@
 const initialState = {
 	restorePhrase: '',
-	restoreAddress: '',
+	restoreAddress: null,
 	// restoreAddress: '0x4fDBFD3f466079897b67D7623fb0B2845Da5D1e6',
 	restorePhraseArr: [],
 	restorePhraseValid: null,

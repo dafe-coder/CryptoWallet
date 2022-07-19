@@ -1,11 +1,18 @@
 import React from 'react'
 import styles from './assets-search.module.css'
 
-const AssetsSearch = () => {
+const AssetsSearch = ({ setValue, value }) => {
 	return (
 		<div className={styles.wallet_input}>
-			<input type='text' id='searchAssets' className={styles.search} required />
-			<label className={styles.label} htmlFor='searchAssets'>
+			<input
+				onChange={(e) => setValue(e.target.value)}
+				type='text'
+				id='searchAssets'
+				className='input'
+				value={value}
+				required
+			/>
+			<label className='label' htmlFor='searchAssets'>
 				<svg
 					width='15'
 					height='15'
