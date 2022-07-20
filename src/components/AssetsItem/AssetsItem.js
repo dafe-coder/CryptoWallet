@@ -9,10 +9,7 @@ const AssetsItem = ({
 	id,
 	currentActive,
 }) => {
-	const [chooseAssets, setChooseAssets] = useState(false)
-	useEffect(() => {
-		setChooseAssets(currentActive)
-	}, [currentActive])
+	const [chooseAssets, setChooseAssets] = useState(currentActive)
 
 	const onChoose = () => {
 		onChooseAssets(id)

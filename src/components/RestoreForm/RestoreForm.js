@@ -30,23 +30,22 @@ const Form = () => {
 		}
 	}, [passwordValid, passwordMatch, nameValid])
 
-	const getAddress = () => {
-		if (+chooseCountWordRestore == restorePhraseArr.length) {
-			let code = new Mnemonic(restorePhrase)
+	const getAddress = (phrase, chooseCountWordRestore) => {
+		if (chooseCountWordRestore != 'own') {
+			let code = new Mnemonic(phrase)
 			const count = chooseCountWordRestore
 			const result = generateAddressesFromSeed(code.phrase, count)
 			console.log(result)
 			dispatch(setRestoreAddress(result))
 		} else {
-			alert('Используешь приватный код')
+			console.log('Используешь приватный код')
 		}
 	}
 	const submitForm = () => {
 		if (passwordValid && passwordMatch && nameValid) {
-			getAddress()
-
 			chrome.storage.sync.get(['userData'], function (result) {
-				if (result.userData.length >= 1) {
+				console.log(result)
+				if (result.userData != undefined) {
 					chrome.storage.sync.set({
 						userData: [
 							...result.userData,
@@ -54,6 +53,7 @@ const Form = () => {
 						],
 					})
 				} else {
+					console.log('less 1')
 					chrome.storage.sync.set({
 						userData: [
 							{ name, password, restoreAddress: restoreAddress[0].address },
@@ -73,7 +73,11 @@ const Form = () => {
 					label='Wallet Name'
 					errorPar='Wallet name requires at least 1 and at most 40 letters'
 				/>
-				<Textarea id='input-phrase' label='Recovery phrase / private key' />
+				<Textarea
+					getAddress={getAddress}
+					id='input-phrase'
+					label='Recovery phrase / private key'
+				/>
 				<Input id='input-password' label='Spending password' type='password' />
 				<Input
 					id='confirm-password'

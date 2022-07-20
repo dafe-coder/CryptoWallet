@@ -1,39 +1,112 @@
 import React, { useEffect, useState } from 'react'
 import styles from './assets-list.module.css'
 import AssetsItem from './../AssetsItem/AssetsItem'
-import btcImg from './btc.png'
-import ethImg from './eth.png'
+import { useSelector } from 'react-redux'
 
 const AssetsList = ({ dataTokens, value }) => {
+	const { loginUser } = useSelector((state) => state.wallet)
 	const [dataTokensFiltered, setDataTokensFiltered] = useState([])
 	const [dataChooseTokens, setDataChooseTokens] = useState([])
+	const [shortChoose, setShortChoose] = useState([])
+
+	useEffect(() => {
+		dataTokens.data && dataTokens.data.length
+			? chrome.storage.sync.get(['userData'], function (result) {
+					if (result.userData.length >= 1) {
+						result.userData.map((item) => {
+							if (loginUser == item.name) {
+								if (item.chooseAssets.length >= 1) {
+									setShortChoose(item.chooseAssets)
+									let dataOld = dataTokens.data
+									let dataNew = dataOld.map((itemOld) => {
+										if (item.chooseAssets.includes(itemOld.id)) {
+											itemOld.currentActive = true
+										}
+										return itemOld
+									})
+									setDataChooseTokens(dataNew)
+								}
+							} else {
+								let dataOld = dataTokens.data
+								let dataNew = dataOld.map((itemOld) => {
+									itemOld.currentActive = false
+									return itemOld
+								})
+								setDataChooseTokens(dataNew)
+							}
+						})
+					}
+			  })
+			: null
+	}, [dataTokens])
+
+	useEffect(() => {
+		setDataTokensFiltered(dataChooseTokens)
+	}, [dataChooseTokens])
 
 	useEffect(() => {
 		if (value != '' && dataTokens.data) {
-			setDataTokensFiltered(
+			setDataChooseTokens(
 				dataTokens.data.filter(
 					(item) => item.name.toLowerCase().indexOf(value.toLowerCase()) != -1
 				)
 			)
 		}
+		setDataTokensFiltered(dataChooseTokens)
 	}, [value])
 
 	const onChooseAssets = (itemId) => {
-		let dataElem = dataTokens.data.filter((item) => itemId == item.id)
-		dataElem[0].currentActive = true
-		setDataChooseTokens([...dataChooseTokens, dataElem])
+		let dataElem = dataChooseTokens.filter((item) => itemId == item.id)
+		setShortChoose((state) => {
+			if (state.length && state.includes(dataElem[0].id)) {
+				dataElem[0].currentActive = false
+				return state.filter((item) => item != dataElem[0].id)
+			} else {
+				dataElem[0].currentActive = true
+				return [...state, dataElem[0].id]
+			}
+		})
+		chrome.storage.sync.get(['userData'], function (result) {
+			if (result.userData.length >= 1) {
+				result.userData.map((item) => {
+					if (loginUser == item.name) {
+						let newArrAccounts = result.userData.filter(
+							(item) => item.name != loginUser
+						)
+						if (item.chooseAssets.length >= 1) {
+							if (item.chooseAssets.includes(dataElem[0].id)) {
+								item.chooseAssets = shortChoose.filter(
+									(item) => item != dataElem[0].id
+								)
+								setDataTokensFiltered([
+									...dataChooseTokens.filter(
+										(item) => item.id != dataElem[0].id
+									),
+								])
+							} else {
+								item.chooseAssets = [...shortChoose, dataElem[0].id]
+								setDataTokensFiltered([
+									...dataChooseTokens.filter(
+										(item) => item.id != dataElem[0].id
+									),
+									dataElem[0],
+								])
+							}
+						} else {
+							item.chooseAssets = [dataElem[0].id]
+						}
+						chrome.storage.sync.set({
+							userData: [...newArrAccounts, item],
+						})
+					}
+				})
+			}
+		})
 	}
-	const onRemoveAssets = (itemId) => {
-		console.log(itemId)
-		let dataElem = dataChooseTokens.filter((item) => itemId !== item[0].id)
-		dataElem.currentActive = false
-		setDataChooseTokens(dataElem)
-	}
-
 	return (
 		<ul className={styles.list}>
-			{value.length && dataTokensFiltered.length
-				? dataTokensFiltered.map((item) => (
+			{value.length >= 1 && dataChooseTokens.length >= 1
+				? dataChooseTokens.map((item) => (
 						<AssetsItem
 							id={item.id}
 							onChooseAssets={onChooseAssets}
@@ -43,16 +116,22 @@ const AssetsList = ({ dataTokens, value }) => {
 							currentActive={item.currentActive}
 						/>
 				  ))
-				: dataChooseTokens.map((item) => (
-						<AssetsItem
-							id={item[0].id}
-							onChooseAssets={onRemoveAssets}
-							key={item[0].id}
-							cryptoImg={item[0].image.thumb}
-							cryptoName={item[0].name}
-							currentActive={item[0].currentActive}
-						/>
-				  ))}
+				: dataTokensFiltered.length
+				? dataTokensFiltered.map((item) => {
+						if (item.currentActive == true) {
+							return (
+								<AssetsItem
+									id={item.id || item[0].id}
+									onChooseAssets={onChooseAssets}
+									key={item.id || item[0].id}
+									cryptoImg={item.image.thumb || item[0].image.thumb}
+									cryptoName={item.name || item[0].name}
+									currentActive={item.currentActive || item[0].currentActive}
+								/>
+							)
+						}
+				  })
+				: null}
 		</ul>
 	)
 }

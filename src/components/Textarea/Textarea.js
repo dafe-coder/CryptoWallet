@@ -10,7 +10,7 @@ import {
 	setRestorePhraseArr,
 } from '../../actions/restoreActions'
 
-const Textarea = ({ id, label, errorPar }) => {
+const Textarea = ({ id, label, errorPar, getAddress }) => {
 	const [marginInput, setMarginInput] = useState(null)
 	const [phraseBoolean, setPhraseBoolean] = useState(null)
 
@@ -34,6 +34,7 @@ const Textarea = ({ id, label, errorPar }) => {
 
 		if (phraseArr.length == +chooseCountWordRestore) {
 			dispatch(setRestorePhraseValid(true))
+			getAddress(phrase, chooseCountWordRestore)
 		} else if ('own' == chooseCountWordRestore && restorePhrase.length >= 1) {
 			dispatch(setRestorePhraseValid(true))
 			setPhraseBoolean(true)

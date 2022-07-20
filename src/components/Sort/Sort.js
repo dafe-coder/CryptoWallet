@@ -34,9 +34,9 @@ const Sort = ({ filterData, sortOpen }) => {
 			</li>
 			<li
 				className={cn({
-					[styles.active]: portfolioSort == 'volume',
+					[styles.active]: portfolioSort == 'change',
 				})}
-				onClick={() => onFilter('volume')}>
+				onClick={() => onFilter('change')}>
 				24H Change
 			</li>
 		</ul>

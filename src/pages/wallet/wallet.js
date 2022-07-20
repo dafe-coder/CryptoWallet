@@ -12,23 +12,28 @@ import { setCurrentPage } from '../../actions/createActions'
 import Sort from '../../components/Sort/Sort'
 import Svg from './../../svgs/Svg'
 import Web3 from 'web3'
+import CoinGecko from 'coingecko-api'
+
 const Wallet = () => {
-	const { portfolioSort } = useSelector((state) => state.wallet)
+	const { portfolioSort, loginUser } = useSelector((state) => state.wallet)
 	const dispatch = useDispatch()
 	const { loading, error, getDataWallet } = useWalletService()
 	const [sortOpen, setSortOpen] = useState(false)
-	const [portfolioList, setPortfolioList] = useState([])
 	const [portfolioListSorted, setPortfolioListSorted] = useState([])
+	const [portfolioFrst, setPortfolioFrst] = useState([])
+	const [portfolioScnd, setPortfolioScnd] = useState([])
+	const [arrChoose, setArrChoose] = useState([])
+	const [dataTokens, setDataTokens] = useState([])
 
-	const filterData = (type, list = portfolioList) => {
+	const filterData = (type, list = portfolioListSorted) => {
 		let sortedArr = []
 		switch (type) {
 			case 'name':
 				sortedArr = list.sort(function (a, b) {
-					if (a.contract_ticker_symbol > b.contract_ticker_symbol) {
+					if (a.symbol > b.symbol) {
 						return 1
 					}
-					if (a.contract_ticker_symbol < b.contract_ticker_symbol) {
+					if (a.symbol < b.symbol) {
 						return -1
 					}
 					return 0
@@ -37,31 +42,67 @@ const Wallet = () => {
 			case 'value':
 				sortedArr = list.sort(function (a, b) {
 					if (
-						Number(Web3.utils.fromWei(String(a.balance), 'ether')).toFixed(5) >
-						Number(Web3.utils.fromWei(String(b.balance), 'ether')).toFixed(5)
+						Number(
+							Web3.utils.fromWei(
+								String(a.market_data.current_price.balance),
+								'ether'
+							)
+						).toFixed(3) >
+						Number(
+							Web3.utils.fromWei(
+								String(b.market_data.current_price.balance),
+								'ether'
+							)
+						).toFixed(3)
 					) {
 						return -1
 					}
 					if (
-						Number(Web3.utils.fromWei(String(a.balance), 'ether')).toFixed(5) <
-						Number(Web3.utils.fromWei(String(b.balance), 'ether')).toFixed(5)
+						Number(
+							Web3.utils.fromWei(
+								String(a.market_data.current_price.balance),
+								'ether'
+							)
+						).toFixed(3) <
+						Number(
+							Web3.utils.fromWei(
+								String(b.market_data.current_price.balance),
+								'ether'
+							)
+						).toFixed(3)
 					) {
 						return 1
 					}
 					return 0
 				})
 				break
-			case 'volume':
+			case 'change':
 				sortedArr = list.sort(function (a, b) {
 					if (
-						((a.quote_rate / a.quote_rate_24h) * 100 - 100).toFixed(3) >
-						((b.quote_rate / b.quote_rate_24h) * 100 - 100).toFixed(3)
+						(
+							(a.market_data.current_price.usd / a.market_data.high_24h.usd) *
+								100 -
+							100
+						).toFixed(3) >
+						(
+							(b.market_data.current_price.usd / b.market_data.high_24h.usd) *
+								100 -
+							100
+						).toFixed(3)
 					) {
 						return -1
 					}
 					if (
-						((a.quote_rate / a.quote_rate_24h) * 100 - 100).toFixed(3) <
-						((b.quote_rate / b.quote_rate_24h) * 100 - 100).toFixed(3)
+						(
+							(a.market_data.current_price.usd / a.market_data.high_24h.usd) *
+								100 -
+							100
+						).toFixed(3) <
+						(
+							(b.market_data.current_price.usd / b.market_data.high_24h.usd) *
+								100 -
+							100
+						).toFixed(3)
 					) {
 						return 1
 					}
@@ -74,15 +115,76 @@ const Wallet = () => {
 		}
 		setPortfolioListSorted(sortedArr)
 	}
+	useEffect(() => {
+		chrome.storage.sync.get(['userData'], function (result) {
+			if (result.userData.length >= 1) {
+				result.userData.map((item) => {
+					if (loginUser == item.name) {
+						setArrChoose(item.chooseAssets)
+					}
+				})
+			}
+		})
+		const CoinGeckoClient = new CoinGecko()
+
+		var func = async () => {
+			let data = await CoinGeckoClient.coins.all()
+			setDataTokens(data)
+		}
+		func()
+	}, [])
+
+	useEffect(() => {
+		if (dataTokens.data != undefined) {
+			let newArr = arrChoose.map((token) => {
+				return dataTokens.data.filter((item) => {
+					if (token == item.id) {
+						item.market_data.balance = 0
+						return item
+					}
+				})
+			})
+			let newArrObj = newArr.map((item) => item[0])
+			setPortfolioScnd(newArrObj)
+		}
+	}, [dataTokens])
 
 	useEffect(() => {
 		getDataWallet().then((data) => onPortfolioListLoaded(data.items))
 	}, [])
 
+	useEffect(() => {
+		setPortfolioListSorted([...portfolioFrst, ...portfolioScnd])
+		// console.log(portfolioListSorted)
+	}, [portfolioFrst, portfolioScnd])
+
 	const onPortfolioListLoaded = (list) => {
-		setPortfolioList(list)
-		setPortfolioListSorted(list)
-		filterData(portfolioSort, list)
+		let newList = rebuildObj(list)
+		setPortfolioFrst(newList)
+	}
+
+	function rebuildObj(list) {
+		const newList = list.map((obj) => {
+			return {
+				id: obj.contract_name,
+				symbol: obj.contract_ticker_symbol,
+				market_data: {
+					current_price: {
+						usd: obj.quote_rate,
+					},
+					balance: Number(
+						Web3.utils.fromWei(String(obj.balance), 'ether')
+					).toFixed(3),
+					high_24h: {
+						usd: obj.quote_rate_24h,
+					},
+				},
+				image: {
+					thumb: obj.logo_url,
+				},
+			}
+		})
+		return newList
 	}
 	return (
 		<section className={'bg-white'}>

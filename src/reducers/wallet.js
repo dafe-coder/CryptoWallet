@@ -6,6 +6,8 @@ const initialState = {
 	portfolioOpen: 'ETH',
 	portfolioData: [],
 	chooseTimeOut: null,
+	login: true,
+	loginUser: 'Wallet 3',
 }
 
 const restore = (state = initialState, action) => {

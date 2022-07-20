@@ -75,7 +75,7 @@ const Pages = () => {
 			}
 		})
 		chrome.storage.sync.get(['userData'], function (result) {
-			// console.log(result.userData)
+			console.log(result.userData[4].chooseAssets)
 		})
 		// chrome.storage.sync.clear()
 	}, [])
