@@ -29,6 +29,9 @@
 	text-overflow: ellipsis;
 	margin: 0;
 }
+.address_copy {
+	padding-right: 25px;
+}
 
 .btn_copy {
 	position: absolute;

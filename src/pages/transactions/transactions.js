@@ -10,6 +10,8 @@ import { useDispatch, useSelector } from 'react-redux'
 import useWalletService from '../../services/WalletService'
 import { setPortfolioData } from '../../actions/wallet'
 import Web3 from 'web3'
+import transactionsSend from '../Func.wallet/transaction'
+import getData from './../Func.wallet/getDataWallet'
 
 const Transactions = () => {
 	const dispatch = useDispatch()
@@ -18,11 +20,8 @@ const Transactions = () => {
 	const { portfolioOpen, portfolioData } = useSelector((state) => state.wallet)
 	const data = ['send', 'receive', 'send', 'swap']
 	useEffect(() => {
-		getDataWallet().then((data) => onPortfolioLoaded(data.items))
+		getData(dispatch, getDataWallet, onPortfolioLoaded)
 	}, [])
-	useEffect(() => {
-		console.log(portfolioData)
-	}, [loading])
 	const onPortfolioLoaded = (list) => {
 		itemPortfolio = list.filter(
 			(item) => item.contract_ticker_symbol == portfolioOpen

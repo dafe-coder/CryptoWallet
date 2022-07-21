@@ -13,6 +13,7 @@ import Sort from '../../components/Sort/Sort'
 import Svg from './../../svgs/Svg'
 import Web3 from 'web3'
 import CoinGecko from 'coingecko-api'
+import getData from '../Func.wallet/getDataWallet'
 
 const Wallet = () => {
 	const { portfolioSort, loginUser } = useSelector((state) => state.wallet)
@@ -115,6 +116,7 @@ const Wallet = () => {
 		}
 		setPortfolioListSorted(sortedArr)
 	}
+
 	useEffect(() => {
 		chrome.storage.local.get(['userData'], function (result) {
 			if (result.userData.length >= 1) {
@@ -122,9 +124,7 @@ const Wallet = () => {
 					if (res.WalletChoose) {
 						result.userData.map((item) => {
 							if (res.WalletChoose == item.name) {
-								console.log(item.chooseAssets)
 								if (item.chooseAssets && item.chooseAssets.length) {
-									console.log(item)
 									setArrChoose(item.chooseAssets)
 								}
 							}
@@ -158,7 +158,7 @@ const Wallet = () => {
 	}, [dataTokens])
 
 	useEffect(() => {
-		getDataWallet().then((data) => onPortfolioListLoaded(data.items))
+		getData(dispatch, getDataWallet, onPortfolioListLoaded)
 	}, [])
 
 	useEffect(() => {
@@ -173,6 +173,9 @@ const Wallet = () => {
 
 	function rebuildObj(list) {
 		const newList = list.map((obj) => {
+			console.log(
+				Number(Web3.utils.fromWei(String(obj.balance), 'ether')).toFixed(3)
+			)
 			return {
 				id: obj.contract_name,
 				symbol: obj.contract_ticker_symbol,

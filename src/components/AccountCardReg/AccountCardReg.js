@@ -2,13 +2,15 @@ import React, { useState, useEffect } from 'react'
 import styles from './account-card.module.css'
 import useWalletService from '../../services/WalletService'
 import Web3 from 'web3'
+import getData from '../../pages/Func.wallet/getDataWallet'
+import { useDispatch } from 'react-redux'
 
 const AccountCardReg = () => {
+	const dispatch = useDispatch()
 	const { error, loading, getDataWallet } = useWalletService()
 	const [accountData, setAccountData] = useState(null)
-
 	useEffect(() => {
-		getDataWallet().then((data) => onAccountLoaded(data))
+		getData(dispatch, getDataWallet, onAccountLoaded)
 	}, [])
 	const onAccountLoaded = (list) => {
 		setAccountData(list)

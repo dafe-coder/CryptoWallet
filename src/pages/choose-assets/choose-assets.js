@@ -13,7 +13,6 @@ const ChooseAssets = () => {
 	const dispatch = useDispatch()
 	const [dataTokens, setDataTokens] = useState([])
 	const [value, setValue] = useState([])
-	const { loading, error, getWalletToken } = useWalletService()
 	const CoinGeckoClient = new CoinGecko()
 
 	var func = async () => {

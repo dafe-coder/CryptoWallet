@@ -37,7 +37,7 @@ const Form = () => {
 			const count = chooseCountWordRestore
 			const result = generateAddressesFromSeed(code.phrase, count)
 			console.log(result)
-			dispatch(setRestoreAddress(result))
+			dispatch(setRestoreAddress(result[0].address))
 		} else {
 			console.log('Используешь приватный код')
 		}

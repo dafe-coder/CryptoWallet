@@ -37,6 +37,7 @@ import {
 	setShowErrorVerification,
 	setShowSuccessVerification,
 } from '../actions/createActions'
+import { setRestoreAddress } from '../actions/restoreActions'
 
 const Pages = () => {
 	const dispatch = useDispatch()
@@ -44,6 +45,24 @@ const Pages = () => {
 		useSelector((state) => state.create)
 
 	useEffect(() => {
+		chrome.storage.local.get(['WalletChoose'], function (result) {
+			if (result.WalletChoose) {
+				dispatch(setWalletChoose(result.WalletChoose))
+			} else {
+				dispatch(setCurrentPage('Home'))
+			}
+		})
+		chrome.storage.local.get(['userData'], function (res) {
+			if (res.userData.length) {
+				res.userData.forEach((item) => {
+					chrome.storage.local.get(['WalletChoose'], function (result) {
+						if (item.name == result.WalletChoose) {
+							dispatch(setRestoreAddress(item.restoreAddress))
+						}
+					})
+				})
+			}
+		})
 		let timerId
 
 		chrome.storage.session.get(['timer'], function (result) {
@@ -61,13 +80,6 @@ const Pages = () => {
 	}, [])
 
 	useEffect(() => {
-		chrome.storage.local.get(['WalletChoose'], function (result) {
-			if (result.WalletChoose) {
-				dispatch(setWalletChoose(result.WalletChoose))
-			} else {
-				dispatch(setCurrentPage('Home'))
-			}
-		})
 		chrome.storage.local.get(['logTimeOut'], function (result) {
 			if (result.logTimeOut) {
 				dispatch(setChooseTimeOut(result.logTimeOut))
@@ -83,7 +95,7 @@ const Pages = () => {
 			}
 		})
 		chrome.storage.local.get(['userData'], function (result) {
-			console.log(result.userData)
+			// console.log(result.userData)
 		})
 
 		// chrome.storage.local.clear()

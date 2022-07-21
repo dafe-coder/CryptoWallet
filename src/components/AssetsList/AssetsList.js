@@ -14,8 +14,9 @@ const AssetsList = ({ dataTokens, value }) => {
 			? chrome.storage.local.get(['userData'], function (result) {
 					if (result.userData.length >= 1) {
 						result.userData.map((item) => {
+							console.log(loginUser)
 							if (loginUser == item.name) {
-								if (item.chooseAssets && item.chooseAssets.length >= 1) {
+								if (item.chooseAssets.length >= 1) {
 									setShortChoose(item.chooseAssets)
 									let dataOld = dataTokens.data
 									let dataNew = dataOld.map((itemOld) => {
@@ -25,14 +26,8 @@ const AssetsList = ({ dataTokens, value }) => {
 										return itemOld
 									})
 									setDataChooseTokens(dataNew)
+									setDataTokensFiltered(dataNew)
 								}
-							} else {
-								let dataOld = dataTokens.data
-								let dataNew = dataOld.map((itemOld) => {
-									itemOld.currentActive = false
-									return itemOld
-								})
-								setDataChooseTokens(dataNew)
 							}
 						})
 					}
@@ -70,8 +65,6 @@ const AssetsList = ({ dataTokens, value }) => {
 			if (result.userData.length >= 1) {
 				result.userData.map((item) => {
 					if (loginUser == item.name) {
-						console.log(item)
-
 						let newArrAccounts = result.userData.filter(
 							(item) => item.name != loginUser
 						)

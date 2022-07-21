@@ -5,15 +5,15 @@ import useWalletService from '../../services/WalletService'
 import { setDataWalletLabels, setDataWalletPrices } from '../../actions/wallet'
 import { useDispatch, useSelector } from 'react-redux'
 import Web3 from 'web3'
+import getData from '../../pages/Func.wallet/getDataWallet'
 
 const ApexChart = () => {
 	const dispatch = useDispatch()
 	const { loading, error, getDataWallet } = useWalletService()
 
 	const { dataLabels, dataPrices } = useSelector((state) => state.wallet)
-
 	useEffect(() => {
-		getDataWallet().then((data) => onPieCharLoaded(data.items))
+		getData(dispatch, getDataWallet, onPieCharLoaded)
 	}, [])
 
 	const onPieCharLoaded = (list) => {
@@ -114,11 +114,15 @@ const ApexChart = () => {
 
 	return (
 		<div id='chart'>
-			<ReactApexChart
-				options={state.options}
-				series={state.series}
-				type='donut'
-			/>
+			{loading ? (
+				<h3>Loading ...</h3>
+			) : (
+				<ReactApexChart
+					options={state.options}
+					series={state.series}
+					type='donut'
+				/>
+			)}
 		</div>
 	)
 }
