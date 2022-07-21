@@ -8,6 +8,7 @@ import cn from 'classnames'
 import generateAddressesFromSeed from '../../pages/Func.wallet/generateAddress'
 import Mnemonic from 'bitcore-mnemonic/lib/mnemonic'
 import { setRestoreAddress } from './../../actions/restoreActions'
+import { setWalletChoose } from '../../actions/wallet'
 const Form = () => {
 	const dispatch = useDispatch()
 	const { passwordValid, passwordMatch, nameValid, name, password } =
@@ -43,10 +44,10 @@ const Form = () => {
 	}
 	const submitForm = () => {
 		if (passwordValid && passwordMatch && nameValid) {
-			chrome.storage.sync.get(['userData'], function (result) {
+			chrome.storage.local.get(['userData'], function (result) {
 				console.log(result)
 				if (result.userData != undefined) {
-					chrome.storage.sync.set({
+					chrome.storage.local.set({
 						userData: [
 							...result.userData,
 							{ name, password, restoreAddress: restoreAddress[0].address },
@@ -54,12 +55,15 @@ const Form = () => {
 					})
 				} else {
 					console.log('less 1')
-					chrome.storage.sync.set({
+					chrome.storage.local.set({
 						userData: [
 							{ name, password, restoreAddress: restoreAddress[0].address },
 						],
 					})
 				}
+			})
+			chrome.storage.local.set({ WalletChoose: name }, function () {
+				dispatch(setWalletChoose(name))
 			})
 			dispatch(setCurrentPage('RestoreWalletLog'))
 		} else {

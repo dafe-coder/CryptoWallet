@@ -6,7 +6,7 @@ const AccountCardList = () => {
 	const [data, setData] = useState(null)
 	// const [active, setData] = useState(null)
 	useEffect(() => {
-		chrome.storage.sync.get(['userData'], function (result) {
+		chrome.storage.local.get(['userData'], function (result) {
 			setData(result.userData)
 		})
 	}, [])
@@ -14,15 +14,12 @@ const AccountCardList = () => {
 		<ul className={styles.list}>
 			{data != null ? (
 				data.map((item) => (
-					<AccountCard
-						key={item.restoreAddress}
-						title={item.name}
-						onClick={() => alert('choose')}>
+					<AccountCard key={item.restoreAddress} title={item.name}>
 						{item.restoreAddress}
 					</AccountCard>
 				))
 			) : (
-				<h2>Nothing</h2>
+				<h4>No accounts</h4>
 			)}
 		</ul>
 	)

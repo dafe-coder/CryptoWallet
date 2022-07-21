@@ -8,13 +8,19 @@ import Svg from '../../svgs/Svg'
 import Modal from './../../components/modal/Modal'
 import Input from './../../components/Input/Input'
 import styles from './accounts.module.css'
+import { setCurrentPage } from '../../actions/createActions'
+import { useDispatch } from 'react-redux'
+
 const Accounts = () => {
+	const dispatch = useDispatch()
 	return (
 		<section className='bg-white'>
 			<div className='wallet_body'>
 				<div className='wallet-top'>
 					<div className='wallet-header'>
-						<Buttons type='back'></Buttons>
+						<Buttons
+							type='back'
+							onClick={() => dispatch(setCurrentPage('Wallet'))}></Buttons>
 						<Title>Account</Title>
 						<div>
 							<Buttons type='lock'>Lock</Buttons>
@@ -22,12 +28,16 @@ const Accounts = () => {
 					</div>
 					<MyAccount />
 				</div>
-				<div className='wallet-bottom'>
+				<div className='wallet-bottom' style={{ paddingBottom: '25px' }}>
 					<Button type='border-primary' positionSvg='left' mb={true}>
 						<Svg type='plus' />
 						Add account
 					</Button>
-					<Button mt='0' type='border-primary' positionSvg='left'>
+					<Button
+						onClick={() => dispatch(setCurrentPage('WalletRestore'))}
+						mt='0'
+						type='border-primary'
+						positionSvg='left'>
 						<Svg type='upload' />
 						Import account
 					</Button>

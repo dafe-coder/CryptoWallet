@@ -16,11 +16,11 @@ const WelcomeBack = () => {
 	const dispatch = useDispatch()
 
 	const logIn = () => {
-		chrome.storage.sync.get(['userData'], function (result) {
+		chrome.storage.local.get(['userData'], function (result) {
 			console.log(result.userData[1])
 			if (password == result.userData[1]) {
 				dispatch(setCurrentPage(currentPage))
-				chrome.storage.sync.get(['logTimeOut'], function (result) {
+				chrome.storage.local.get(['logTimeOut'], function (result) {
 					logTimer(result.logTimeOut)
 				})
 			} else {

@@ -9,8 +9,8 @@ const Dropdown = ({ dataDropdown, active, type }) => {
 	let dispatch = useDispatch()
 	const [open, setOpen] = useState(false)
 	const setLoginTimeOut = (value) => {
-		chrome.storage.sync.remove(['logTimeOut'])
-		chrome.storage.sync.set({ logTimeOut: value })
+		chrome.storage.local.remove(['logTimeOut'])
+		chrome.storage.local.set({ logTimeOut: value })
 	}
 	const onChoose = (e) => {
 		const target = e.target

@@ -11,11 +11,11 @@ const AssetsList = ({ dataTokens, value }) => {
 
 	useEffect(() => {
 		dataTokens.data && dataTokens.data.length
-			? chrome.storage.sync.get(['userData'], function (result) {
+			? chrome.storage.local.get(['userData'], function (result) {
 					if (result.userData.length >= 1) {
 						result.userData.map((item) => {
 							if (loginUser == item.name) {
-								if (item.chooseAssets.length >= 1) {
+								if (item.chooseAssets && item.chooseAssets.length >= 1) {
 									setShortChoose(item.chooseAssets)
 									let dataOld = dataTokens.data
 									let dataNew = dataOld.map((itemOld) => {
@@ -66,14 +66,16 @@ const AssetsList = ({ dataTokens, value }) => {
 				return [...state, dataElem[0].id]
 			}
 		})
-		chrome.storage.sync.get(['userData'], function (result) {
+		chrome.storage.local.get(['userData'], function (result) {
 			if (result.userData.length >= 1) {
 				result.userData.map((item) => {
 					if (loginUser == item.name) {
+						console.log(item)
+
 						let newArrAccounts = result.userData.filter(
 							(item) => item.name != loginUser
 						)
-						if (item.chooseAssets.length >= 1) {
+						if (item.chooseAssets && item.chooseAssets.length >= 1) {
 							if (item.chooseAssets.includes(dataElem[0].id)) {
 								item.chooseAssets = shortChoose.filter(
 									(item) => item != dataElem[0].id
@@ -95,7 +97,7 @@ const AssetsList = ({ dataTokens, value }) => {
 						} else {
 							item.chooseAssets = [dataElem[0].id]
 						}
-						chrome.storage.sync.set({
+						chrome.storage.local.set({
 							userData: [...newArrAccounts, item],
 						})
 					}

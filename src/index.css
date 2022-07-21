@@ -267,3 +267,8 @@ ul li.active-time {
 	color: var(--primary);
 	font-weight: 600;
 }
+
+
+ul li.active-wallet {
+	border-color: var(--primary)
+}

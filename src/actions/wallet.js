@@ -34,3 +34,9 @@ export const setChooseTimeOut = (time) => {
 		payload: time,
 	}
 }
+export const setWalletChoose = (walletName) => {
+	return {
+		type: 'SET_WALLET_CHOOSE',
+		payload: walletName,
+	}
+}

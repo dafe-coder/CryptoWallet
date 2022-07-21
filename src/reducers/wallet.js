@@ -7,7 +7,7 @@ const initialState = {
 	portfolioData: [],
 	chooseTimeOut: null,
 	login: true,
-	loginUser: 'Wallet 3',
+	loginUser: '',
 }
 
 const restore = (state = initialState, action) => {
@@ -46,6 +46,11 @@ const restore = (state = initialState, action) => {
 			return {
 				...state,
 				chooseTimeOut: action.payload,
+			}
+		case 'SET_WALLET_CHOOSE':
+			return {
+				...state,
+				loginUser: action.payload,
 			}
 		default:
 			return state

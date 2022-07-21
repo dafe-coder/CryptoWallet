@@ -30,7 +30,8 @@ import SecurityPrivacy from './security-privacy/security-privacy'
 import SelectLanguage from './select-language/select-language'
 import { useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { setChooseTimeOut } from '../actions/wallet'
+import { setChooseTimeOut, setWalletChoose } from '../actions/wallet'
+
 import {
 	setCurrentPage,
 	setShowErrorVerification,
@@ -60,11 +61,18 @@ const Pages = () => {
 	}, [])
 
 	useEffect(() => {
-		chrome.storage.sync.get(['logTimeOut'], function (result) {
+		chrome.storage.local.get(['WalletChoose'], function (result) {
+			if (result.WalletChoose) {
+				dispatch(setWalletChoose(result.WalletChoose))
+			} else {
+				dispatch(setCurrentPage('Home'))
+			}
+		})
+		chrome.storage.local.get(['logTimeOut'], function (result) {
 			if (result.logTimeOut) {
 				dispatch(setChooseTimeOut(result.logTimeOut))
 			} else {
-				chrome.storage.sync.set({ logTimeOut: '30 minutes' })
+				chrome.storage.local.set({ logTimeOut: '30 minutes' })
 				dispatch(setChooseTimeOut('30 minutes'))
 			}
 		})
@@ -74,10 +82,11 @@ const Pages = () => {
 				dispatch(setCurrentPage(result.currentPage))
 			}
 		})
-		chrome.storage.sync.get(['userData'], function (result) {
-			console.log(result.userData[4].chooseAssets)
+		chrome.storage.local.get(['userData'], function (result) {
+			console.log(result.userData)
 		})
-		// chrome.storage.sync.clear()
+
+		// chrome.storage.local.clear()
 	}, [])
 	const renderPages = () => {
 		switch (currentPage) {

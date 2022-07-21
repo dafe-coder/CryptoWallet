@@ -116,11 +116,19 @@ const Wallet = () => {
 		setPortfolioListSorted(sortedArr)
 	}
 	useEffect(() => {
-		chrome.storage.sync.get(['userData'], function (result) {
+		chrome.storage.local.get(['userData'], function (result) {
 			if (result.userData.length >= 1) {
-				result.userData.map((item) => {
-					if (loginUser == item.name) {
-						setArrChoose(item.chooseAssets)
+				chrome.storage.local.get(['WalletChoose'], function (res) {
+					if (res.WalletChoose) {
+						result.userData.map((item) => {
+							if (res.WalletChoose == item.name) {
+								console.log(item.chooseAssets)
+								if (item.chooseAssets && item.chooseAssets.length) {
+									console.log(item)
+									setArrChoose(item.chooseAssets)
+								}
+							}
+						})
 					}
 				})
 			}
@@ -135,7 +143,7 @@ const Wallet = () => {
 	}, [])
 
 	useEffect(() => {
-		if (dataTokens.data != undefined) {
+		if (dataTokens.data != undefined && arrChoose && arrChoose.length >= 1) {
 			let newArr = arrChoose.map((token) => {
 				return dataTokens.data.filter((item) => {
 					if (token == item.id) {
@@ -197,7 +205,7 @@ const Wallet = () => {
 						}></Buttons>
 					<Title>Your Account</Title>
 					<Buttons
-						onClick={() => dispatch(setCurrentPage('Settings'))}
+						onClick={() => dispatch(setCurrentPage('Accounts'))}
 						type='account'></Buttons>
 				</div>
 				<div className='wallet-top' style={{ position: 'relative' }}>
