@@ -7,7 +7,7 @@ import useWalletService from '../../services/WalletService'
 import { useDispatch } from 'react-redux/es/exports'
 import { setTokenTransaction } from '../../actions/wallet'
 
-const SelectToken = ({ setValidToken }) => {
+const SelectToken = ({ setValidToken, transactionTokens = false }) => {
 	const dispatch = useDispatch()
 	const [value, setValue] = useState('')
 	const [active, setActive] = useState('Select a token')
@@ -60,7 +60,9 @@ const SelectToken = ({ setValidToken }) => {
 		setActiveElem(elemChoose[0])
 		setActive(item.name)
 		setOpenDropdown(false)
-		dispatch(setTokenTransaction(elemChoose[0]))
+		if (transactionTokens == true) {
+			dispatch(setTokenTransaction(elemChoose[0]))
+		}
 		setValidToken(true)
 	}
 

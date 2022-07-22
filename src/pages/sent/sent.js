@@ -23,9 +23,6 @@ const Sent = () => {
 		(state) => state.wallet
 	)
 	const { restoreAddress } = useSelector((state) => state.restore)
-	useEffect(() => {
-		console.log(tokenTransaction ? tokenTransaction.contract_address : null)
-	}, [tokenTransaction])
 
 	const onWriteAddress = (e) => {
 		if (e.target.value !== '') {
@@ -59,7 +56,7 @@ const Sent = () => {
 						<Title>Sent</Title>
 						<div></div>
 					</div>
-					<SelectToken setValidToken={setValidToken} />
+					<SelectToken setValidToken={setValidToken} transactionTokens />
 					<div className='wallet-input'>
 						<input
 							className='input'

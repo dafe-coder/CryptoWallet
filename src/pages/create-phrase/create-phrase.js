@@ -12,7 +12,6 @@ import { useSelector } from 'react-redux'
 import { useDispatch } from 'react-redux'
 import { setCurrentPage } from '../../actions/createActions'
 import GoBack from '../../components/GoBack/GoBack'
-
 const CreatePhrase = () => {
 	const [openQr, setOpenQr] = useState(false)
 	const { phrase } = useSelector((state) => state.create)

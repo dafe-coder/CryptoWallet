@@ -5,6 +5,7 @@ import { useState } from 'react'
 import { useSelector } from 'react-redux'
 import SvgPhrase from './SvgPhrase'
 import { useDispatch } from 'react-redux'
+import copyText from '../../pages/Func.wallet/copy'
 const PhraseBox = ({
 	btns = true,
 	select = false,
@@ -16,23 +17,6 @@ const PhraseBox = ({
 	)
 	const [copied, setCopied] = useState(false)
 	const dispatch = useDispatch()
-
-	const onCopy = () => {
-		if (phrase !== '') {
-			setCopied(true)
-
-			var copyHelper = document.createElement('input')
-			copyHelper.className = 'copyhelper'
-			document.body.appendChild(copyHelper)
-			copyHelper.value = phrase
-			copyHelper.select()
-			document.execCommand('copy')
-			setTimeout(() => {
-				setCopied(false)
-				document.body.removeChild(copyHelper)
-			}, 1000)
-		}
-	}
 
 	const chooseWord = (e, word) => {
 		console.log(e.target)
@@ -74,7 +58,7 @@ const PhraseBox = ({
 			{btns == true ? (
 				<div className={styles.buttons}>
 					<button
-						onClick={onCopy}
+						onClick={() => copyText(phrase, setCopied)}
 						id='copy-phrase'
 						className={cn({
 							[styles.success]: copied == true,
