@@ -20,3 +20,9 @@
 	line-height: 16px;
 	cursor: pointer;
 }
+
+.list .active {
+	border-color: var(--primary);
+	color: var(--primary);
+	font-weight: 600;
+}

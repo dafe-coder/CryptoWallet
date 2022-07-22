@@ -114,7 +114,7 @@ async function transferErc20Token(
 	fromAddress = web3.utils.toChecksumAddress(fromAddress)
 	toAddress = web3.utils.toChecksumAddress(toAddress)
 	tokenAddress = web3.utils.toChecksumAddress(tokenAddress)
-	var token_amount = web3.utils.toHex(web3.utils.toWei(token_amount))
+	var token_amount = web3.utils.toHex(web3.utils.toWei(amount))
 
 	var contract = await new web3.eth.Contract(MIN_ABI, tokenAddress, {
 		from: fromAddress,
@@ -138,18 +138,34 @@ async function sendETH(fromAddress, toAddress, amount) {
 #   \ \_\ \ \_\ \_\ \_\ \_\ \_\\"\_\    \ \_\  \ \_____\ \_\\"\_\ \_____\ 
 #    \/_/  \/_/\/_/\/_/\/_/\/_/ \/_/     \/_/   \/_____/\/_/ \/_/\/_____/                                                                         
 */
-export default async function transactionsSend(from, to, token, amount) {
+export default async function transactionsSend(
+	from,
+	to,
+	token,
+	amount,
+	ether = false
+) {
 	// Set input data
 	const FROM = from // address to send from
 	const TO = to // address to send to
 	const TOKEN = token // token address
 	const AMOUNT = amount // amount of token/eth, has to be a String value: "322", "2.88" etc.
 
-	transferErc20Token(FROM, TO, TOKEN, AMOUNT) // or sendETH(FROM, TO, "0.0025")
-		.then((message) => {
-			console.log(message)
-		})
-		.catch((error) => {
-			console.log(error.message)
-		})
+	if (ether) {
+		sendETH(FROM, TO, amount) // or sendETH(FROM, TO, "0.0025")
+			.then((message) => {
+				console.log(message)
+			})
+			.catch((error) => {
+				console.log(error.message)
+			})
+	} else {
+		transferErc20Token(FROM, TO, TOKEN, AMOUNT) // or sendETH(FROM, TO, "0.0025")
+			.then((message) => {
+				console.log(message)
+			})
+			.catch((error) => {
+				console.log(error.message)
+			})
+	}
 }

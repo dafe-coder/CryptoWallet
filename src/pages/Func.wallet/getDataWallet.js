@@ -7,9 +7,7 @@ export default function getData(dispatch, getDataWallet, callback) {
 				chrome.storage.local.get(['WalletChoose'], function (result) {
 					if (item.name == result.WalletChoose) {
 						dispatch(setRestoreAddress(item.restoreAddress))
-						getDataWallet(item.restoreAddress).then((data) =>
-							callback(data.items)
-						)
+						getDataWallet(item.restoreAddress).then((data) => callback(data))
 					}
 				})
 			})

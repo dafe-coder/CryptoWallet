@@ -10,7 +10,6 @@ import { useDispatch, useSelector } from 'react-redux'
 import useWalletService from '../../services/WalletService'
 import { setPortfolioData } from '../../actions/wallet'
 import Web3 from 'web3'
-import transactionsSend from '../Func.wallet/transaction'
 import getData from './../Func.wallet/getDataWallet'
 
 const Transactions = () => {
@@ -23,9 +22,7 @@ const Transactions = () => {
 		getData(dispatch, getDataWallet, onPortfolioLoaded)
 	}, [])
 	const onPortfolioLoaded = (list) => {
-		itemPortfolio = list.filter(
-			(item) => item.contract_ticker_symbol == portfolioOpen
-		)
+		itemPortfolio = list.filter((item) => item.symbol == portfolioOpen)
 		dispatch(setPortfolioData(itemPortfolio))
 	}
 	return (
@@ -41,19 +38,12 @@ const Transactions = () => {
 				<div className='wallet-top'>
 					{portfolioData.length >= 1 ? (
 						<TransactionInfo
-							cryptoImg={portfolioData[0].logo_url}
-							cryptoName={portfolioData[0].contract_ticker_symbol}
-							cryptoPrice={
-								+Number(
-									+Number(
-										Web3.utils.fromWei(
-											String(portfolioData[0].balance),
-											'ether'
-										)
-									) * +Number(portfolioData[0].quote_rate)
-								).toFixed(2)
-							}
-							cryptoCount={portfolioData[0].balance}
+							cryptoImg={portfolioData[0].image.thumb}
+							cryptoName={portfolioData[0].symbol}
+							cryptoPrice={portfolioData[0].market_data.balance_crypto.usd.toFixed(
+								1
+							)}
+							cryptoCount={portfolioData[0].market_data.balance}
 						/>
 					) : (
 						<></>

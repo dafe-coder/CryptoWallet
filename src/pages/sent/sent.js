@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import Buttons from './../../components/Buttons/Buttons'
 import Title from '../../components/Title/Title'
 import SelectToken from './../../components/SelectToken/SelectToken'
@@ -10,10 +10,43 @@ import cn from 'classnames'
 import Par from './../../components/Par/Par'
 import PaymentDetails from '../../components/PaymentDetails/PaymentDetails'
 import { setCurrentPage } from '../../actions/createActions'
-import { useDispatch } from 'react-redux'
-
+import { useDispatch, useSelector } from 'react-redux'
+import transactionsSend from '../Func.wallet/transaction'
+import Button from '../../components/Button/Button'
 const Sent = () => {
 	const dispatch = useDispatch()
+	const [value, setValue] = useState('')
+	const [validToken, setValidToken] = useState(false)
+	const [validAddress, setValidAddress] = useState(false)
+	const [validAmount, setValidAmount] = useState(false)
+	const { tokenTransactionAmount, tokenTransaction } = useSelector(
+		(state) => state.wallet
+	)
+	const { restoreAddress } = useSelector((state) => state.restore)
+	useEffect(() => {
+		console.log(tokenTransaction ? tokenTransaction.contract_address : null)
+	}, [tokenTransaction])
+
+	const onWriteAddress = (e) => {
+		if (e.target.value !== '') {
+			setValidAddress(true)
+		} else {
+			setValidAddress(false)
+		}
+		setValue(e.target.value)
+	}
+
+	const onSentToken = () => {
+		if (validAmount && validAddress && validToken) {
+			alert('send!')
+		}
+		// transactionsSend(
+		// 		restoreAddress,
+		// 		value,
+		// 		tokenTransaction.contract_address,
+		// 		tokenTransactionAmount
+		// 	)
+	}
 	return (
 		<section className='bg-white'>
 			<div className='wallet-body'>
@@ -26,17 +59,36 @@ const Sent = () => {
 						<Title>Sent</Title>
 						<div></div>
 					</div>
-					<SelectToken />
+					<SelectToken setValidToken={setValidToken} />
 					<div className='wallet-input'>
-						<input className='input' type='text' id='address' required={true} />
+						<input
+							className='input'
+							type='text'
+							id='address'
+							required={true}
+							value={value}
+							onChange={(e) => onWriteAddress(e)}
+						/>
 						<label className='label' htmlFor='address'>
 							Enter Adress
 						</label>
 					</div>
-					<Amount />
+					<Amount setValidAmount={setValidAmount} />
 					<PaymentDetails />
 				</div>
-				<div className='wallet-bottom'></div>
+				<div className='wallet-bottom'>
+					<Button
+						className={cn('btn', {
+							['disabled']:
+								validToken == false ||
+								validAmount == false ||
+								validAddress == false,
+						})}
+						type='primary'
+						onClick={() => onSentToken()}>
+						Next
+					</Button>
+				</div>
 			</div>
 			<Modal padding='20' open={false}>
 				<BoxWithIcon style={{ margin: '0' }}>

@@ -40,3 +40,15 @@ export const setWalletChoose = (walletName) => {
 		payload: walletName,
 	}
 }
+export const setTokenTransaction = (walletName) => {
+	return {
+		type: 'SET_TOKEN_TRANSACTION',
+		payload: walletName,
+	}
+}
+export const setTokenTransactionAmount = (amount) => {
+	return {
+		type: 'SET_TOKEN_TRANSACTION_AMOUNT',
+		payload: amount,
+	}
+}

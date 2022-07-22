@@ -20,11 +20,11 @@ const ApexChart = () => {
 		const arr = []
 		const arrPrice = []
 		list.forEach((item) => {
-			arr.push(item.contract_ticker_symbol)
+			arr.push(item.symbol)
 			arrPrice.push(
 				+Number(
-					+Number(Web3.utils.fromWei(String(item.balance), 'ether')) *
-						+Number(item.quote_rate)
+					+Number(item.market_data.balance) *
+						+Number(item.market_data.current_price.usd)
 				).toFixed(2)
 			)
 		})

@@ -2,7 +2,7 @@ const initialState = {
 	phrase: '',
 	phraseArr: [],
 	phraseArrScattered: [],
-	currentPage: 'Sent',
+	currentPage: 'Receive',
 	name: '',
 	password: '',
 	passwordCheck: '',

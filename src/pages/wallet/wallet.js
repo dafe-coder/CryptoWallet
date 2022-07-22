@@ -12,13 +12,12 @@ import { setCurrentPage } from '../../actions/createActions'
 import Sort from '../../components/Sort/Sort'
 import Svg from './../../svgs/Svg'
 import Web3 from 'web3'
-import CoinGecko from 'coingecko-api'
 import getData from '../Func.wallet/getDataWallet'
 
 const Wallet = () => {
 	const { portfolioSort, loginUser } = useSelector((state) => state.wallet)
 	const dispatch = useDispatch()
-	const { loading, error, getDataWallet } = useWalletService()
+	const { loading, error, getDataWallet, getAllTokens } = useWalletService()
 	const [sortOpen, setSortOpen] = useState(false)
 	const [portfolioListSorted, setPortfolioListSorted] = useState([])
 	const [portfolioFrst, setPortfolioFrst] = useState([])
@@ -43,36 +42,14 @@ const Wallet = () => {
 			case 'value':
 				sortedArr = list.sort(function (a, b) {
 					if (
-						Number(
-							Web3.utils.fromWei(
-								String(a.market_data.current_price.balance),
-								'ether'
-							)
-						).toFixed(3) >
-						Number(
-							Web3.utils.fromWei(
-								String(b.market_data.current_price.balance),
-								'ether'
-							)
-						).toFixed(3)
-					) {
-						return -1
-					}
-					if (
-						Number(
-							Web3.utils.fromWei(
-								String(a.market_data.current_price.balance),
-								'ether'
-							)
-						).toFixed(3) <
-						Number(
-							Web3.utils.fromWei(
-								String(b.market_data.current_price.balance),
-								'ether'
-							)
-						).toFixed(3)
+						a.market_data.balance_crypto.usd > b.market_data.balance_crypto.usd
 					) {
 						return 1
+					}
+					if (
+						a.market_data.balance_crypto.usd < b.market_data.balance_crypto.usd
+					) {
+						return -1
 					}
 					return 0
 				})
@@ -133,21 +110,14 @@ const Wallet = () => {
 				})
 			}
 		})
-		const CoinGeckoClient = new CoinGecko()
-
-		var func = async () => {
-			let data = await CoinGeckoClient.coins.all()
-			setDataTokens(data)
-		}
-		func()
+		getAllTokens(setDataTokens)
 	}, [])
 
 	useEffect(() => {
-		if (dataTokens.data != undefined && arrChoose && arrChoose.length >= 1) {
+		if (dataTokens != undefined && arrChoose && arrChoose.length >= 1) {
 			let newArr = arrChoose.map((token) => {
-				return dataTokens.data.filter((item) => {
+				return dataTokens.filter((item) => {
 					if (token == item.id) {
-						item.market_data.balance = 0
 						return item
 					}
 				})
@@ -167,36 +137,10 @@ const Wallet = () => {
 	}, [portfolioFrst, portfolioScnd])
 
 	const onPortfolioListLoaded = (list) => {
-		let newList = rebuildObj(list)
-		setPortfolioFrst(newList)
+		console.log(list)
+		setPortfolioFrst(list)
 	}
 
-	function rebuildObj(list) {
-		const newList = list.map((obj) => {
-			console.log(
-				Number(Web3.utils.fromWei(String(obj.balance), 'ether')).toFixed(3)
-			)
-			return {
-				id: obj.contract_name,
-				symbol: obj.contract_ticker_symbol,
-				market_data: {
-					current_price: {
-						usd: obj.quote_rate,
-					},
-					balance: Number(
-						Web3.utils.fromWei(String(obj.balance), 'ether')
-					).toFixed(3),
-					high_24h: {
-						usd: obj.quote_rate_24h,
-					},
-				},
-				image: {
-					thumb: obj.logo_url,
-				},
-			}
-		})
-		return newList
-	}
 	return (
 		<section className={'bg-white'}>
 			<div className='wallet-body'>

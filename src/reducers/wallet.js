@@ -8,6 +8,8 @@ const initialState = {
 	chooseTimeOut: null,
 	login: true,
 	loginUser: '',
+	tokenTransaction: null,
+	tokenTransactionAmount: '',
 }
 
 const restore = (state = initialState, action) => {
@@ -51,6 +53,16 @@ const restore = (state = initialState, action) => {
 			return {
 				...state,
 				loginUser: action.payload,
+			}
+		case 'SET_TOKEN_TRANSACTION':
+			return {
+				...state,
+				tokenTransaction: action.payload,
+			}
+		case 'SET_TOKEN_TRANSACTION_AMOUNT':
+			return {
+				...state,
+				tokenTransactionAmount: action.payload,
 			}
 		default:
 			return state
