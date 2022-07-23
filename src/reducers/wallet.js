@@ -10,6 +10,9 @@ const initialState = {
 	loginUser: '',
 	tokenTransaction: null,
 	tokenTransactionAmount: '',
+	currencyValue: '',
+	currentCurrency: '',
+	tokenBuy: {},
 }
 
 const restore = (state = initialState, action) => {
@@ -63,6 +66,21 @@ const restore = (state = initialState, action) => {
 			return {
 				...state,
 				tokenTransactionAmount: action.payload,
+			}
+		case 'SET_CURRENCY_VALUE':
+			return {
+				...state,
+				currencyValue: action.payload,
+			}
+		case 'SET_TOKEN_BUY':
+			return {
+				...state,
+				tokenBuy: action.payload,
+			}
+		case 'SET_CURRENT_CURRENCY':
+			return {
+				...state,
+				currentCurrency: action.payload,
 			}
 		default:
 			return state

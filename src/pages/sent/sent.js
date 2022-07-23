@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import Buttons from './../../components/Buttons/Buttons'
 import Title from '../../components/Title/Title'
-import SelectToken from './../../components/SelectToken/SelectToken'
+import SelectToken from '../../components/SelectToken/SelectToken'
 import Amount from './../../components/Amount/Amount'
 import Modal from '../../components/modal/Modal'
 import BoxWithIcon from '../../components/BoxWithIcon/BoxWithIcon'

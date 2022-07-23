@@ -28,6 +28,7 @@ import SeedPhrase from './seed-phrase/seed-phrase'
 import About from './about/about'
 import SecurityPrivacy from './security-privacy/security-privacy'
 import SelectLanguage from './select-language/select-language'
+import Buy from './buy/buy'
 import { useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { setChooseTimeOut, setWalletChoose } from '../actions/wallet'
@@ -38,6 +39,7 @@ import {
 	setShowSuccessVerification,
 } from '../actions/createActions'
 import { setRestoreAddress } from '../actions/restoreActions'
+import Menu from './../components/Menu/Menu'
 
 const Pages = () => {
 	const dispatch = useDispatch()
@@ -156,12 +158,15 @@ const Pages = () => {
 				return <About />
 			case 'SecurityPrivacy':
 				return <SecurityPrivacy />
+			case 'Buy':
+				return <Buy />
 			default:
 				return <></>
 		}
 	}
 	return (
 		<>
+			<Menu />
 			{renderPages()}
 			<Modal
 				open={showErrorVerification}

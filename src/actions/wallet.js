@@ -52,3 +52,21 @@ export const setTokenTransactionAmount = (amount) => {
 		payload: amount,
 	}
 }
+export const setCurrencyValue = (amount) => {
+	return {
+		type: 'SET_CURRENCY_VALUE',
+		payload: amount,
+	}
+}
+export const setTokenBuy = (token) => {
+	return {
+		type: 'SET_TOKEN_BUY',
+		payload: token,
+	}
+}
+export const setCurrentCurrency = (currency) => {
+	return {
+		type: 'SET_CURRENT_CURRENCY',
+		payload: currency,
+	}
+}
